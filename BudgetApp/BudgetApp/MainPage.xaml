@@ -4,7 +4,57 @@
              x:Class="BudgetApp.MainPage">
     
     <Grid>
+        <!--<Grid ColumnDefinitions="*,*"/>-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!--<Picker x:Name="picker"
+        Title="Select a monkey"
+        TitleColor="Red">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Baboon</x:String>
+                    <x:String>Capuchin Monkey</x:String>
+                    <x:String>Blue Monkey</x:String>
+                    <x:String>Squirrel Monkey</x:String>
+                    <x:String>Golden Lion Tamarin</x:String>
+                    <x:String>Howler Monkey</x:String>
+                    <x:String>Japanese Macaque</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>-->
+        <!--<DatePicker Format="MM/dd" Date="{Binding SelectedFromDate}">
+        </DatePicker>-->
+            <!--Display picker items based on data binding: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/picker/populating-itemssource-->
+        <StackLayout Grid.Row="1">
+            <Label Text="What's your favorite animal?" />
+            <StackLayout RadioButtonGroup.GroupName="animals"
+                 Orientation="Vertical">
+                <RadioButton Value="Cat" Content="Travel" />
+                <RadioButton Value="Cat" Content="Exercise" />
+                <RadioButton Value="Cat" Content="Housing" />
+                <RadioButton Value="Cat" Content="Groceries" />
+                <RadioButton Value="Cat" Content="Other" />
+            </StackLayout>
+        </StackLayout>
+        <DatePicker HorizontalOptions="Fill" Date="{Binding SelectedDate}" MinimumDate="1 Jan 2000" MaximumDate="31 Dec 2050"  Grid.Row="3">
+            <DatePicker.Format>MM/dd/yyyy</DatePicker.Format>
+        </DatePicker>
+        <Entry Placeholder="Expense Description" CursorPosition="10" Grid.Row="0"/>
+        <Entry Placeholder="Expense Amount" CursorPosition="10" Grid.Row="2"/>
+        <Button Text="Save" Grid.Row="4" Grid.Column="0"/>
+        <Button Text="Delete" Grid.Row="4" Grid.Column="1"/>
         
+        <!--Get more info on including an image in a radiobutton here: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/radiobutton-->
     </Grid>
+    
 
 </ContentPage>
