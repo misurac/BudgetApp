@@ -13,4 +13,6 @@
         </StackLayout>
     </ContentPage.Content>
 
+<!--<Button Text="" />
+<Picker Title="" />-->
 </ContentPage>
