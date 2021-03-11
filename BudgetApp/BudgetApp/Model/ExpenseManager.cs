@@ -25,6 +25,6 @@ namespace BudgetApp.Model
             //These are placeholders method
             //TODO Save this expense to a file
             return true;
-        }
+        } 
     }
 }
