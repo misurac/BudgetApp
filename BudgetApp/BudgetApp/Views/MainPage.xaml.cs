@@ -16,11 +16,16 @@ namespace BudgetApp
             InitializeComponent();
         }
 
+        public string selectedCategory { get; set; }
+        public string expenseDescription { get; set; }
+        public string expenseAmount { get; set; }
+        public DateTime expenseDate { get; set; }
+
         //This is the event handler for the Category Picker
         private void SelectedCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             var SelectedCategory = picker.Items[picker.SelectedIndex];
-            Debug.WriteLine(SelectedCategory);
+            selectedCategory = SelectedCategory;
         }
 
         //This is the event handler for the ExpenseDescription Entry box
@@ -28,7 +33,7 @@ namespace BudgetApp
         {
             var oldText = e.OldTextValue;
             var newText = e.NewTextValue;
-            Debug.WriteLine(newText);
+            expenseDescription = newText;
         }
 
         //This is the event handler for the ExpenseAmount Entry box
@@ -36,7 +41,7 @@ namespace BudgetApp
         {
             var oldText = e.OldTextValue;
             var newText = e.NewTextValue;
-            Debug.WriteLine(newText);
+            expenseAmount = newText;
         }
 
         //This is the event handler for the DatePicker
@@ -44,7 +49,21 @@ namespace BudgetApp
         {
             var picker = sender as DatePicker;
             DateTime? date = picker.Date;
-            Debug.WriteLine(date);
+            expenseDate = (DateTime)date;
+        }
+
+        //The event handler for the Save Button currently writes the values of the page to Output
+        private void SaveButtonClicked(object sender, EventArgs e)
+        {
+            Debug.WriteLine(selectedCategory);
+            Debug.WriteLine(expenseDescription);
+            Debug.WriteLine(expenseAmount);
+            Debug.WriteLine(expenseDate);
+        }
+
+        private void DeleteButtonClicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

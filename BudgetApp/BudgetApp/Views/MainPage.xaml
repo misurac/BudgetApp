@@ -44,9 +44,9 @@
             <DatePicker.Format>MM/dd/yyyy</DatePicker.Format>
         </DatePicker>
         
-        <Button Text="Save" Grid.Row="4" Grid.Column="0"/>
+        <Button Text="Save" Grid.Row="4" Grid.Column="0" Clicked="SaveButtonClicked"/>
         
-        <Button Text="Delete" Grid.Row="4" Grid.Column="1"/>
+        <Button Text="Delete" Grid.Row="4" Grid.Column="1" Clicked="DeleteButtonClicked"/>
     </Grid>
     
 
