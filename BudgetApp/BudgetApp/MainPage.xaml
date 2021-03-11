@@ -23,7 +23,8 @@
         <Picker x:Name="picker"
                 Title="Select a category"
                 TitleColor="Red"
-                Grid.Row="1">
+                Grid.Row="1"
+                SelectedIndexChanged="SelectedCategory_SelectedIndexChanged">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Travel</x:String>

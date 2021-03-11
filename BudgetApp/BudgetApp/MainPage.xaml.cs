@@ -14,5 +14,10 @@ namespace BudgetApp
         {
             InitializeComponent();
         }
+
+        private void SelectedCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
