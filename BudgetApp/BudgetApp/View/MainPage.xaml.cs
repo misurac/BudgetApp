@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BudgetApp.Model;
+using BudgetApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,15 +18,30 @@ namespace BudgetApp.View
         {
             InitializeComponent();
         }
-        private void AddNewExpense_Clicked(object sender, EventArgs e)
+        private void HamburgerButton_Clicked(object sender, EventArgs e)
         {
+
+        }
+        private  async void AddNewExpense_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new ExpensePage
+            {
+                BindingContext = new Expense()
+            });
 
         }
 
 
 
-        private void ExpenseRecord_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void ExpenseRecord_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            if (e.SelectedItem != null)
+            {
+                await Navigation.PushModalAsync(new ExpensePage
+                {
+                    BindingContext = (Expense)e.SelectedItem
+                });
+            }
 
         }
     }
