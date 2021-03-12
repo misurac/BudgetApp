@@ -17,15 +17,24 @@ namespace BudgetApp.Model
     }
     public class Expense
     {
-        public string Name { get; set; }
+        public string ExpenseName { get; set; }
         public float Amount { get; set; }
         public DateTime Date { get; set; }
         public ExpenseCategory Category { get; set; }
+        public string FileName { get; set; }
+        public string CategoryIconFile { get; set; }
 
-        public Expense(String name, float amount, ExpenseCategory category= ExpenseCategory.Other)
+        public Expense(String expenseName, float amount, DateTime date, ExpenseCategory category= ExpenseCategory.Other)
         {
-            Name = name;
+            ExpenseName = expenseName;
             Amount = amount;
+            Category = category;
+            if (date == null)
+            {
+                date = DateTime.Now;
+            }           
+            Date = date;
+            CategoryIconFile = $"/Assets/CategoryIcons/{Category}/{ExpenseName}.png";
         }
     }
 
