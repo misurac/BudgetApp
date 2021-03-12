@@ -7,10 +7,10 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*" />
-            <ColumnDefinition Width="0.5*" />
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
@@ -18,12 +18,20 @@
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
-        <Entry Placeholder="Describe your expense" CursorPosition="10" Grid.Row="0" TextChanged="ExpenseDescriptionTextChanged"/>
+        <Label Text="Add Your New Expense" VerticalOptions="Center" HorizontalOptions="Center"
+               FontSize="Title"/>
+
+        <Entry Placeholder="Describe your expense" CursorPosition="10" Grid.Row="1" 
+               Margin="30,0,0,0"
+               HorizontalOptions="StartAndExpand"
+               TextChanged="ExpenseDescriptionTextChanged"/>
 
         <Picker x:Name="picker"
                 Title="Select a category"
                 TitleColor="Black"
-                Grid.Row="1"
+                Grid.Row="2"
+                Margin="30,0,0,0"
+                HorizontalOptions="StartAndExpand"
                 SelectedIndexChanged="SelectedCategory_SelectedIndexChanged"
                 >
             <Picker.ItemsSource>
@@ -38,16 +46,26 @@
             </Picker.ItemsSource>
         </Picker>
 
-        <Entry Placeholder="$ 00.00" CursorPosition="10" Grid.Row="2" TextChanged="ExpenseAmountTextChanged"/>
 
-        <DatePicker HorizontalOptions="Fill" Date="{Binding SelectedDate}" MinimumDate="1 Jan 2000" MaximumDate="31 Dec 2050"  Grid.Row="3"
-                    DateSelected="DatePicker_DateSelected">
+        <Entry Placeholder="$ 00.00" CursorPosition="10" Margin="30,0,0,0" Grid.Row="3" 
+               HorizontalOptions="StartAndExpand" TextChanged="ExpenseAmountTextChanged"/>
+
+        <DatePicker HorizontalOptions="StartAndExpand"  Date="{Binding SelectedDate}" MinimumDate="1 Jan 2000" MaximumDate="31 Dec 2050"  Grid.Row="4"
+                    DateSelected="DatePicker_DateSelected" Margin="30,0,0,0">
             <DatePicker.Format>MM/dd/yyyy</DatePicker.Format>
         </DatePicker>
-        
-        <Button Text="Save" Grid.Row="4" Grid.Column="0" Clicked="SaveButtonClicked"/>
-        
-        <Button Text="Delete" Grid.Row="4" Grid.Column="1" Clicked="DeleteButtonClicked"/>
+
+        <RelativeLayout Grid.Row="5">
+
+            <Button Text="Save" Clicked="SaveButtonClicked"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=30}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
+            <Button Text="Delete" Clicked="DeleteButtonClicked"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=130}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
+        </RelativeLayout>
     </Grid>
     
 
