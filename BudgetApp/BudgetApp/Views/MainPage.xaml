@@ -4,14 +4,6 @@
              xmlns:local="clr-namespace:BudgetApp"
              x:Class="BudgetApp.MainPage">
 
-    <!--<ContentPage.BindingContext>
-        <local:MainPage/>
-    </ContentPage.BindingContext>-->
-
-    <!--<ContentPage.BindingContext>
-        <x:Reference Name="This" />
-    </ContentPage.BindingContext>-->
-
     <Grid>
 
         <Grid.ColumnDefinitions>

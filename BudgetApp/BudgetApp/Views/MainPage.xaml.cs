@@ -16,7 +16,7 @@ namespace BudgetApp
         {
             InitializeComponent();
 
-            //Here I create a list of type Enum, which has the values of the Enum (i.e. 1, 2, 3, etc.)
+            //Here I create a list of type ExpenseCategory, which has the values of the Enum (i.e. 1, 2, 3, etc.)
             ExpenseCategoriesList = new List<ExpenseCategory>();
             ExpenseCategoriesList.Add(ExpenseCategory.Food);
             ExpenseCategoriesList.Add(ExpenseCategory.Housing);
