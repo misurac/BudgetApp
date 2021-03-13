@@ -26,6 +26,33 @@
                HorizontalOptions="StartAndExpand"
                TextChanged="ExpenseDescriptionTextChanged"/>
 
+        <Picker 
+            x:Name="picker"
+            Title="Select category"
+            Grid.Row="2"
+            Margin="30,0,0,0"
+            HorizontalOptions="StartAndExpand"
+            SelectedIndexChanged="SelectedCategory_SelectedIndexChanged"/>
+
+        <Entry Placeholder="$ 00.00" CursorPosition="10" Margin="30,0,0,0" Grid.Row="3" 
+               HorizontalOptions="StartAndExpand" TextChanged="ExpenseAmountTextChanged"/>
+
+        <DatePicker HorizontalOptions="StartAndExpand"  Date="{Binding SelectedDate}" MinimumDate="1 Jan 2000" MaximumDate="31 Dec 2050"  Grid.Row="4"
+                    DateSelected="DatePicker_DateSelected" Margin="30,0,0,0">
+            <DatePicker.Format>MM/dd/yyyy</DatePicker.Format>
+        </DatePicker>
+
+        <RelativeLayout Grid.Row="5">
+
+            <Button Text="Save" Clicked="SaveButtonClicked"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=30}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
+            <Button Text="Delete" Clicked="DeleteButtonClicked"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=130}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
+        </RelativeLayout>
 
 
     </Grid>
