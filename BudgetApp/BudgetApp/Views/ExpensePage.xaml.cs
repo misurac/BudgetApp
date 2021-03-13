@@ -42,6 +42,7 @@ namespace BudgetApp.Views
         public DateTime expenseDate { get; set; }
         public List<ExpenseCategory> ExpenseCategoriesList { get; set; }
         public List<string> expenseCategoryStrings { get; set; }
+        public Expense currentExpense { get; set; }
 
         //This is the event handler for the ExpenseDescription Entry box
         private void ExpenseDescriptionTextChanged(object sender, TextChangedEventArgs e)
@@ -79,10 +80,19 @@ namespace BudgetApp.Views
         //The event handler for the Save Button currently writes the values of the page to Output
         private void SaveButtonClicked(object sender, EventArgs e)
         {
-            Debug.WriteLine(selectedCategory);
-            Debug.WriteLine(expenseDescription);
-            Debug.WriteLine(expenseAmount);
-            Debug.WriteLine(expenseDate);
+            Expense currentExpense = new Expense();
+
+            //There is an issue with this, because selectedCategory is currently a string derived from an enum
+            //Need to convert from string back to the enum of type ExpenseCategory
+
+            //currentExpense.Category = selectedCategory;
+            currentExpense.Amount = expenseAmount;
+            currentExpense.Date = expenseDate;
+            currentExpense.ExpenseName = expenseDescription;
+
+            //Uncomment this once we can set the category
+            //ExpenseManager.SaveExpense(currentExpense);
+
         }
 
         private void DeleteButtonClicked(object sender, EventArgs e)
