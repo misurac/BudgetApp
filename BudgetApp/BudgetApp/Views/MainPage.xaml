@@ -36,33 +36,13 @@
                HorizontalOptions="StartAndExpand"
                TextChanged="ExpenseDescriptionTextChanged"/>
 
-        <!--<Picker x:Name="picker"
-                Title="Select a category"
-                TitleColor="Black"
-                Grid.Row="2"
-                Margin="30,0,0,0"
-                HorizontalOptions="StartAndExpand"
-                SelectedIndexChanged="SelectedCategory_SelectedIndexChanged"
-                >
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Travel</x:String>
-                    <x:String>Exercise</x:String>
-                    <x:String>Housing</x:String>
-                    <x:String>Groceries</x:String>
-                    <x:String>Other</x:String>
-                    <x:String>Household expenses</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>-->
-
         <Picker 
             x:Name="picker"
             Title="Select category"
             Grid.Row="2"
             Margin="30,0,0,0"
             HorizontalOptions="StartAndExpand"
-            ItemDisplayBinding="{Binding Akshay}"/>
+            SelectedIndexChanged="SelectedCategory_SelectedIndexChanged"/>
 
         <Entry Placeholder="$ 00.00" CursorPosition="10" Margin="30,0,0,0" Grid.Row="3" 
                HorizontalOptions="StartAndExpand" TextChanged="ExpenseAmountTextChanged"/>

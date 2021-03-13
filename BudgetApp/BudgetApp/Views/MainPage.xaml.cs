@@ -15,26 +15,41 @@ namespace BudgetApp
         public MainPage()
         {
             InitializeComponent();
-            TestList = new List<Foo>();
-            TestList.Add(new Foo() { Akshay = "This" });
-            TestList.Add(new Foo() { Akshay = "is" });
-            TestList.Add(new Foo() { Akshay = "my" });
-            TestList.Add(new Foo() { Akshay = "list" });
-            picker.ItemsSource = TestList;
+
+            //Here I create a list of type Enum, which has the values of the Enum (i.e. 1, 2, 3, etc.)
+            ExpenseCategoriesList = new List<ExpenseCategory>();
+            ExpenseCategoriesList.Add(ExpenseCategory.Food);
+            ExpenseCategoriesList.Add(ExpenseCategory.Housing);
+            ExpenseCategoriesList.Add(ExpenseCategory.Insuarance);
+            ExpenseCategoriesList.Add(ExpenseCategory.Medical);
+            ExpenseCategoriesList.Add(ExpenseCategory.Other);
+            ExpenseCategoriesList.Add(ExpenseCategory.Saving);
+            ExpenseCategoriesList.Add(ExpenseCategory.Transportation);
+            ExpenseCategoriesList.Add(ExpenseCategory.Utilities);
+
+            //Here I convert the values of the Enum to the Names of the enum (i.e. Food, Housing, Insurance, etc.)
+            List<string> expenseCategoryStrings = ExpenseCategoriesList.ConvertAll(f => f.ToString());
+
+            //Here I set the picker to display the expenseCategoryStrings list
+            picker.ItemsSource = expenseCategoryStrings;
+
         }
 
         public string selectedCategory { get; set; }
         public string expenseDescription { get; set; }
         public float expenseAmount { get; set; }
         public DateTime expenseDate { get; set; }
-        public List<Foo> TestList { get; set; }
+        public List<ExpenseCategory> ExpenseCategoriesList { get; set; }
+        public List<string> expenseCategoryStrings { get; set; }
 
 
         //This is the event handler for the Category Picker
         private void SelectedCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //var SelectedCategory = picker.Items[picker.SelectedIndex];
             var SelectedCategory = picker.Items[picker.SelectedIndex];
             selectedCategory = SelectedCategory;
+            Debug.WriteLine(selectedCategory);
         }
 
         //This is the event handler for the ExpenseDescription Entry box
