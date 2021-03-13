@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BudgetApp.Model
 {
     public static class ExpenseManager
     {
+        public static string saveBudgetFileName = "bud.txt";
         public static List<Expense> GetExpenses()
         {
             
-            
+
             var expenses = new List<Expense>();
             //Getting all .exp.txt files from specialFolder.
             var files = Directory.EnumerateFiles(Environment.GetFolderPath
@@ -32,7 +34,7 @@ namespace BudgetApp.Model
                 expense.FileName = filename;
                 //Adding to expenses list
                 expenses.Add(expense);
-            }            
+            }
             return expenses;
         }
         /**
@@ -41,8 +43,9 @@ namespace BudgetApp.Model
          * */
 
         //Will save Expense in to a file 
-        public static bool SaveExpense(Expense e) {
-                    
+        public static bool SaveExpense(Expense e)
+        {
+
             if ((e != null) && (e.Amount > 0))
             {
                 //converting the object in to string and saving it to the file.
@@ -53,23 +56,34 @@ namespace BudgetApp.Model
                 File.WriteAllText(e.FileName, expenseProperties);
             }
             return true;
-        } 
+        }
 
         public static bool SaveBudget(float e)
         {
-            if(e > 0)
+            if (e > 0)
             {
                 var budget = e;
+                /*since there will be only one value for save budget, made it as static variable and given a name
+                /to the file "saveBudgetFileName"*/
                 var budgetFilename = Path.Combine
                     (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    $"{Path.GetRandomFileName()}.bud.txt");
+                   saveBudgetFileName);
                 File.WriteAllText(budgetFilename, budget.ToString());
             }
             return true;
         }
-            
-    }
 
+        public static float ReadBudget()
+        {
+            var filename = Path.Combine
+                    (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    saveBudgetFileName);
+            var budgetAmount = float.Parse(File.ReadAllText(filename));
+            return budgetAmount;
+        }
+
+
+    }
 
 }
 

@@ -14,7 +14,7 @@ namespace BudgetApp.Model {
     public class Test1 {
 
         [TestMethod]
-        public void testMethod() {
+        public void TestGetExpenses() {
             var files = Directory.EnumerateFiles(Environment.GetFolderPath
                 (Environment.SpecialFolder.LocalApplicationData), "*.exp.txt");
             foreach(var file in files)
@@ -30,6 +30,19 @@ namespace BudgetApp.Model {
             count++;
             var Expenses = ExpenseManager.GetExpenses();
             Assert.AreEqual(count, Expenses.Count);
+        }
+
+        [TestMethod]
+        //This will write and read the budget
+        public void TestBudget()
+        {
+            ExpenseManager.SaveBudget(500);
+            var readBudgetAmount=ExpenseManager.ReadBudget();
+            Assert.AreEqual(500, readBudgetAmount);
+
+            ExpenseManager.SaveBudget(600);
+             readBudgetAmount = ExpenseManager.ReadBudget();
+            Assert.AreEqual(600, readBudgetAmount);
         }
     }
 }
