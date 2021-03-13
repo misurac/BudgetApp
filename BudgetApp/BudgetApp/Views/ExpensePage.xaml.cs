@@ -30,10 +30,12 @@ namespace BudgetApp.Views
             ExpenseCategoriesList.Add(ExpenseCategory.Utilities);
 
             //Here I convert the values of the Enum to the Names of the enum (i.e. Food, Housing, Insurance, etc.)
-            List<string> expenseCategoryStrings = ExpenseCategoriesList.ConvertAll(f => f.ToString());
+            expenseCategoryStrings = new List<string>();
+            expenseCategoryStrings = ExpenseCategoriesList.ConvertAll(f => f.ToString());
 
             //Here I set the picker to display the expenseCategoryStrings list
             picker.ItemsSource = expenseCategoryStrings;
+
         }
 
         public string selectedCategory { get; set; }
@@ -80,18 +82,24 @@ namespace BudgetApp.Views
         //The event handler for the Save Button currently writes the values of the page to Output
         private void SaveButtonClicked(object sender, EventArgs e)
         {
+            //Creating a new instance of currentExpense
             Expense currentExpense = new Expense();
 
-            //There is an issue with this, because selectedCategory is currently a string derived from an enum
-            //Need to convert from string back to the enum of type ExpenseCategory
-
-            //currentExpense.Category = selectedCategory;
+            //Setting values for the fields in currentExpense from the UI interface
             currentExpense.Amount = expenseAmount;
             currentExpense.Date = expenseDate;
             currentExpense.ExpenseName = expenseDescription;
 
-            //Uncomment this once we can set the category
-            //ExpenseManager.SaveExpense(currentExpense);
+            //Finding the right ExpenseCategory to assign to currentExpense
+            for (int i = 0; i < expenseCategoryStrings.Count(); i++)
+            {
+                if (expenseCategoryStrings[i] == selectedCategory)
+                {
+                    currentExpense.Category = ExpenseCategoriesList[i];
+                }
+            }
+
+            ExpenseManager.SaveExpense(currentExpense);
 
         }
 
