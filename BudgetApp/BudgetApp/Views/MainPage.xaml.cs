@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BudgetApp.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -14,12 +15,20 @@ namespace BudgetApp
         public MainPage()
         {
             InitializeComponent();
+            TestList = new List<Foo>();
+            TestList.Add(new Foo() { Akshay = "This" });
+            TestList.Add(new Foo() { Akshay = "is" });
+            TestList.Add(new Foo() { Akshay = "my" });
+            TestList.Add(new Foo() { Akshay = "list" });
+            picker.ItemsSource = TestList;
         }
 
         public string selectedCategory { get; set; }
         public string expenseDescription { get; set; }
-        public string expenseAmount { get; set; }
+        public float expenseAmount { get; set; }
         public DateTime expenseDate { get; set; }
+        public List<Foo> TestList { get; set; }
+
 
         //This is the event handler for the Category Picker
         private void SelectedCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,7 +50,7 @@ namespace BudgetApp
         {
             var oldText = e.OldTextValue;
             var newText = e.NewTextValue;
-            expenseAmount = newText;
+            expenseAmount = float.Parse(newText);
         }
 
         //This is the event handler for the DatePicker

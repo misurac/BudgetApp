@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BudgetApp"
              x:Class="BudgetApp.MainPage">
-    
+
+    <!--<ContentPage.BindingContext>
+        <local:MainPage/>
+    </ContentPage.BindingContext>-->
+
+    <!--<ContentPage.BindingContext>
+        <x:Reference Name="This" />
+    </ContentPage.BindingContext>-->
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -10,7 +19,8 @@
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
+            <RowDefinition Height="110" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
@@ -26,7 +36,7 @@
                HorizontalOptions="StartAndExpand"
                TextChanged="ExpenseDescriptionTextChanged"/>
 
-        <Picker x:Name="picker"
+        <!--<Picker x:Name="picker"
                 Title="Select a category"
                 TitleColor="Black"
                 Grid.Row="2"
@@ -44,8 +54,15 @@
                     <x:String>Household expenses</x:String>
                 </x:Array>
             </Picker.ItemsSource>
-        </Picker>
+        </Picker>-->
 
+        <Picker 
+            x:Name="picker"
+            Title="Select category"
+            Grid.Row="2"
+            Margin="30,0,0,0"
+            HorizontalOptions="StartAndExpand"
+            ItemDisplayBinding="{Binding Akshay}"/>
 
         <Entry Placeholder="$ 00.00" CursorPosition="10" Margin="30,0,0,0" Grid.Row="3" 
                HorizontalOptions="StartAndExpand" TextChanged="ExpenseAmountTextChanged"/>
@@ -66,6 +83,9 @@
                     RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
 
         </RelativeLayout>
+
+
+
     </Grid>
     
 
