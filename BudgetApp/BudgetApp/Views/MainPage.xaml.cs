@@ -23,35 +23,17 @@ namespace BudgetApp
            
 
         }
+
         protected override void OnAppearing()
         {
-            var Listexpenses = ExpenseManager.GetExpenses();
-            foreach(var expense in Listexpenses)
+            var Expenses = ExpenseManager.GetExpenses();
+            foreach(var expense in Expenses)
             {
                 expenses.Add(expense);
             }
-            if (Listexpenses.Count == 0) {
-                // This is temporary till save expense form is integrated
-                Expense e = new Expense("test", 12.23f, DateTime.Now);
-                ExpenseManager.SaveExpense(e);
-                expenses.Add(e);
-            }
-           
-            /*var expenses = new List<Expense>();
-            var files = Directory.EnumerateFiles(Environment.GetFolderPath
-                (Environment.SpecialFolder.LocalApplicationData), "*.expense.txt");
-            foreach (var filename in files)
-            {
-                var content = File.ReadAllText(filename);
-                var splittedContent = content.Split(',');
-                Enum.TryParse(splittedContent[3], out ExpenseCategory category);
-                var expense = new Expense(splittedContent[0], float.Parse(splittedContent[1]), 
-                    DateTime.Parse(splittedContent[2]),category);
-                expense.FileName = filename;
-                expenses.Add(expense);
-            }*/
             ExpenseRecords.ItemsSource = expenses.OrderBy(n => n.Date).ToList();
         }
+
         private void HamburgerButton_Clicked(object sender, EventArgs e)
         {
         }
@@ -60,7 +42,7 @@ namespace BudgetApp
             //It will navivate to expense page upon add expense button click
             await Navigation.PushModalAsync(new ExpensePage
             {
-                BindingContext = new Expense()
+                BindingContext = new ExpensePage()
             });
         }
         private async void ExpenseRecord_ItemSelected(object sender, SelectedItemChangedEventArgs e)

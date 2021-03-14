@@ -36,10 +36,7 @@ namespace BudgetApp.Model
             Date = date;
             CategoryIconFile = $"/Assets/CategoryIcons/{Category}/{ExpenseName}.png";
         }
-        public Expense()
-        {
 
-        }
     }
 
     

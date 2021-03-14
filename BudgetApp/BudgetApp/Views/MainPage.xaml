@@ -53,6 +53,7 @@
                                 <ColumnDefinition Width="30*" />
 
                             </Grid.ColumnDefinitions>
+
                             <Label  Grid.Column="0" Text="{Binding ExpenseName}" FontAttributes="Bold"/>
                             <Label  Grid.Column="1" Text="{Binding Date}"/>
                             <Label Grid.Column="2" Text="{Binding Amount}"/>
