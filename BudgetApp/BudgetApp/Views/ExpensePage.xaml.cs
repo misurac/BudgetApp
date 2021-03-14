@@ -80,26 +80,23 @@ namespace BudgetApp.Views
         }
 
         //The event handler for the Save Button currently writes the values of the page to Output
-        private void SaveButtonClicked(object sender, EventArgs e)
+
+        private async void SaveButtonClicked(object sender, EventArgs e)
         {
-            //Creating a new instance of currentExpense
-            Expense currentExpense = new Expense();
-
-            //Setting values for the fields in currentExpense from the UI interface
-            currentExpense.Amount = expenseAmount;
-            currentExpense.Date = expenseDate;
-            currentExpense.ExpenseName = expenseDescription;
-
+          ExpenseCategory PickedCategory = ExpenseCategory.Other;
             //Finding the right ExpenseCategory to assign to currentExpense
             for (int i = 0; i < expenseCategoryStrings.Count(); i++)
             {
                 if (expenseCategoryStrings[i] == selectedCategory)
                 {
-                    currentExpense.Category = ExpenseCategoriesList[i];
+                    PickedCategory = ExpenseCategoriesList[i];
                 }
             }
+            //Creating a new instance of currentExpense
+            Expense currentExpense = new Expense(expenseDescription, expenseAmount, expenseDate, PickedCategory);
 
             ExpenseManager.SaveExpense(currentExpense);
+            await Navigation.PopModalAsync();
 
         }
 

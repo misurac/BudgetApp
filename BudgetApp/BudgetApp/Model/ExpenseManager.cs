@@ -15,6 +15,7 @@ namespace BudgetApp.Model
             
 
             var expenses = new List<Expense>();
+            var folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             //Getting all .exp.txt files from specialFolder.
             var files = Directory.EnumerateFiles(Environment.GetFolderPath
                 (Environment.SpecialFolder.LocalApplicationData), "*.exp.txt");
