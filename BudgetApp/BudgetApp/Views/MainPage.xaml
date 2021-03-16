@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BudgetApp.MainPage" BackgroundColor="Beige">
+             x:Class="BudgetApp.MainPage" BackgroundColor="LightCyan">
 
     <StackLayout>
         <Grid>
@@ -15,12 +15,12 @@
             </Grid.ColumnDefinitions>
         </Grid>
         <Label Text="Monthly Budget" FontAttributes="Bold" FontSize="18" />
-        <Entry Grid.Column="1" Placeholder="" />
-        <Label Grid.Row="1" Text="Remaining Budget :" FontAttributes="Bold" FontSize="18"/>
-        <Entry Grid.Row="1" Grid.Column="1" Placeholder="" />
-        <Button x:Name="AddNewExpense" Text="Add Expense" Clicked="AddNewExpense_Clicked" Margin="40,20,40,20" Font="Bold" FontSize="20"
-                BackgroundColor="LightGray" />
-        <Grid BackgroundColor="LightYellow" WidthRequest="-5">
+        <Entry  x:Name="Budget" Grid.Column="1" Placeholder="{Binding Source= ExpenseManager.ReadBudget}" />
+        <Label  Grid.Row="1" Text="Remaining Budget :" FontAttributes="Bold" FontSize="18"/>
+        <Entry  x:Name="RemainingAmount" Grid.Row="1" Grid.Column="1" Placeholder="{Binding Source = ExpenseManager.RemainingBudget}" />
+        <Button x:Name="AddNewExpense" Text="Add Expense" Clicked="AddNewExpense_Clicked" Margin="100,20,100,20" Font="Bold" FontSize="20"
+                BackgroundColor="LightSeaGreen"/>
+        <Grid BackgroundColor="LightBlue" HeightRequest="30" Margin="0,0,0,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"/>
@@ -29,14 +29,15 @@
                 <ColumnDefinition  Width="30*" />
                 <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="30*" /> 
             </Grid.ColumnDefinitions>
-            <Label  Grid.Column="0" Text="Name" />
-            <Label  Grid.Column="1" Text="Date"/>
-            <Label Grid.Column="2" Text="Amount"/>
-            <Label Grid.Column="3" Text="Category"/>
+            
+            <Label  Grid.Column="0" Text="EName"  FontAttributes="Bold" FontSize="18" Margin="8,0,0,0" WidthRequest="30"/>
+            <Label  Grid.Column="1" Text="Date" FontAttributes="Bold" FontSize="18"/>
+            <Label Grid.Column="2" Text="Amount" FontAttributes="Bold" FontSize="18"/>
+            <Label Grid.Column="3" Text="Category" FontAttributes="Bold" FontSize="18" Margin="0,0,-5,0"/>
         </Grid>
-        <ListView x:Name="ExpenseRecords" ItemsSource="{Binding expenses}">
+        <ListView x:Name="ExpenseRecords" ItemsSource="{Binding expenses}" Margin="8,0,0,0" ItemSelected="ExpenseRecord_ItemSelected" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -55,9 +56,9 @@
                             </Grid.ColumnDefinitions>
 
                             <Label  Grid.Column="0" Text="{Binding ExpenseName}" FontAttributes="Bold"/>
-                            <Label  Grid.Column="1" Text="{Binding Date}"/>
-                            <Label Grid.Column="2" Text="{Binding Amount}"/>
-                            <Label Grid.Column="3" Text="{Binding Category}"/>
+                            <Label  Grid.Column="1" Text="{Binding Date}" FontAttributes="Bold"/>
+                            <Label Grid.Column="2" Text="{Binding Amount}" FontAttributes="Bold"/>
+                            <Label Grid.Column="3" Text="{Binding Category}" FontAttributes="Bold"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

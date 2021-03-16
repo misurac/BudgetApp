@@ -15,23 +15,29 @@ namespace BudgetApp
     public partial class MainPage : ContentPage
     {
         public ObservableCollection<Expense> expenses;
-        
+        public float budget = ExpenseManager.ReadBudget();
+        public float remainingBudget = ExpenseManager.RemainingBudget();
         public MainPage()
         {
             InitializeComponent();
             expenses = new ObservableCollection<Expense>();
-           
-
+            Budget.Text = budget.ToString();
+            RemainingAmount.Text = remainingBudget.ToString();
         }
 
         protected override void OnAppearing()
         {
             var Expenses = ExpenseManager.GetExpenses();
+            //if(budget > 0)
+            //{
+            //    AddNewExpense.IsEnabled = true;
+            //}
             foreach(var expense in Expenses)
             {
                 expenses.Add(expense);
             }
             ExpenseRecords.ItemsSource = expenses.OrderBy(n => n.Date).ToList();
+            
         }
 
         private void HamburgerButton_Clicked(object sender, EventArgs e)
@@ -42,7 +48,7 @@ namespace BudgetApp
             //It will navivate to expense page upon add expense button click
             await Navigation.PushModalAsync(new ExpensePage
             {
-                BindingContext = new ExpensePage()
+                BindingContext = null
             });
         }
         private async void ExpenseRecord_ItemSelected(object sender, SelectedItemChangedEventArgs e)
