@@ -28,11 +28,14 @@ namespace BudgetApp
         protected override void OnAppearing()
         {
             var Expenses = ExpenseManager.GetExpenses();
-            //if(budget > 0)
-            //{
-            //    AddNewExpense.IsEnabled = true;
-            //}
-            foreach(var expense in Expenses)
+            ExpenseManager.SaveBudget(500);
+            Budget.Text = budget.ToString();
+            RemainingAmount.Text = ExpenseManager.RemainingBudget().ToString();
+            if(budget > 0)
+            {
+               AddNewExpense.IsEnabled = true;
+            }
+            foreach (var expense in Expenses)
             {
                 expenses.Add(expense);
             }
