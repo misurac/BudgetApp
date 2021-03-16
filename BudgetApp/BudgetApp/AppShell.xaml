@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:Views="clr-namespace:BudgetApp.Views"
+             xmlns:local="clr-namespace:BudgetApp"
+             x:Class="BudgetApp.AppShell">
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <ContentView BackgroundColor="Gray"
+                         HeightRequest="100">
+                <Label Text="Budget App"
+                       Margin="5,2,5,2"
+                       FontSize="20"
+                       TextColor="GhostWhite"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+            </ContentView>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <StackLayout Orientation="Horizontal"
+                         Spacing="30">
+                <Label Text="{Binding Title}"
+                       TextColor="Black"
+                       FontSize="15"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    <FlyoutItem Title="MainPage">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="ExpensePage">
+        <ShellContent ContentTemplate="{DataTemplate Views:ExpensePage}"/>
+    </FlyoutItem>
+
+</Shell>

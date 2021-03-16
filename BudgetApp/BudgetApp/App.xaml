@@ -3,6 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BudgetApp.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="Material" x:TypeArguments="x:String">
+                
+                <On Platform="Android" Value="materialdesignicons.ttf#Material Design Icons" />
+            </OnPlatform>
+
+        </ResourceDictionary>
 
     </Application.Resources>
 </Application>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,14 @@ namespace BudgetApp.Views
             var newText = e.NewTextValue;
             expenseDescription = newText;
         }
+        /*protected override void OnAppearing()
+        {
+            var expense = (Expense)BindingContext;
+            if (!string.IsNullOrEmpty(expense.FileName))
+            {
+                 File.ReadAllText(expense.FileName);
+            }
+        }*/
 
         //This is the event handler for the Category Picker
         private void SelectedCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,6 +106,7 @@ namespace BudgetApp.Views
 
             ExpenseManager.SaveExpense(currentExpense);
             await Navigation.PopModalAsync();
+           
 
         }
 

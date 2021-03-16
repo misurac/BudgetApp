@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BudgetApp.MainPage" BackgroundColor="Beige">
+             x:Class="BudgetApp.MainPage" >
 
     <StackLayout>
         <Grid>
@@ -19,8 +19,8 @@
         <Label Grid.Row="1" Text="Remaining Budget :" FontAttributes="Bold" FontSize="18"/>
         <Entry Grid.Row="1" Grid.Column="1" Placeholder="" />
         <Button x:Name="AddNewExpense" Text="Add Expense" Clicked="AddNewExpense_Clicked" Margin="40,20,40,20" Font="Bold" FontSize="20"
-                BackgroundColor="LightGray" />
-        <Grid BackgroundColor="LightYellow" WidthRequest="-5">
+                 />
+        <Grid WidthRequest="-5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto"/>
@@ -30,13 +30,17 @@
                 <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="30*" />
             </Grid.ColumnDefinitions>
             <Label  Grid.Column="0" Text="Name" />
             <Label  Grid.Column="1" Text="Date"/>
             <Label Grid.Column="2" Text="Amount"/>
             <Label Grid.Column="3" Text="Category"/>
+            <Label Grid.Column="4" Text="Icon"/>
         </Grid>
-        <ListView x:Name="ExpenseRecords" ItemsSource="{Binding expenses}">
+        <ListView x:Name="ExpenseRecords" ItemsSource="{Binding expenses}"
+                  Margin="20"
+                  ItemSelected="ExpenseRecord_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -51,6 +55,8 @@
                                 <ColumnDefinition Width="30*" />
                                 <ColumnDefinition Width="30*" />
                                 <ColumnDefinition Width="30*" />
+                                <ColumnDefinition Width="30*" />
+
 
                             </Grid.ColumnDefinitions>
 
@@ -58,6 +64,9 @@
                             <Label  Grid.Column="1" Text="{Binding Date}"/>
                             <Label Grid.Column="2" Text="{Binding Amount}"/>
                             <Label Grid.Column="3" Text="{Binding Category}"/>
+                            <Label Grid.Column="4" Text="{Binding Icon}" />
+                            <Label Style="{StaticResource MaterialIcons}"               
+                                   TextColor="Red" Text="" FontSize="100"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
