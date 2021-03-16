@@ -29,13 +29,15 @@
                 <ColumnDefinition  Width="30*" />
                 <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="30*" /> 
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="30*" />
             </Grid.ColumnDefinitions>
             
             <Label  Grid.Column="0" Text="EName"  FontAttributes="Bold" FontSize="18" Margin="8,0,0,0" WidthRequest="30"/>
             <Label  Grid.Column="1" Text="Date" FontAttributes="Bold" FontSize="18"/>
             <Label Grid.Column="2" Text="Amount" FontAttributes="Bold" FontSize="18"/>
             <Label Grid.Column="3" Text="Category" FontAttributes="Bold" FontSize="18" Margin="0,0,-5,0"/>
+            <Label Grid.Column="4" Text="Icon" FontAttributes="Bold" FontSize="18" Margin="0,0,-5,0"/>
         </Grid>
         <ListView x:Name="ExpenseRecords" ItemsSource="{Binding expenses}" Margin="8,0,0,0" ItemSelected="ExpenseRecord_ItemSelected" >
             <ListView.ItemTemplate>
@@ -52,6 +54,7 @@
                                 <ColumnDefinition Width="30*" />
                                 <ColumnDefinition Width="30*" />
                                 <ColumnDefinition Width="30*" />
+                                <ColumnDefinition Width="30*" />
 
                             </Grid.ColumnDefinitions>
 
@@ -59,6 +62,9 @@
                             <Label  Grid.Column="1" Text="{Binding Date}" FontAttributes="Bold"/>
                             <Label Grid.Column="2" Text="{Binding Amount}" FontAttributes="Bold"/>
                             <Label Grid.Column="3" Text="{Binding Category}" FontAttributes="Bold"/>
+                            <Label Grid.Column="4" Text="{Binding Icon}" FontAttributes="Bold"/>
+                            <Label Style="{StaticResource MaterialIcons}"               
+                                   TextColor="Red" Text="" FontSize="100"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
