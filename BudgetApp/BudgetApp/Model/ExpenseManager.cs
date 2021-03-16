@@ -61,6 +61,7 @@ namespace BudgetApp.Model
 
         public static bool SaveBudget(float e)
         {
+            
             if (e > 0)
             {
                 var budget = e;
@@ -76,11 +77,49 @@ namespace BudgetApp.Model
 
         public static float ReadBudget()
         {
+
             var filename = Path.Combine
                     (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     saveBudgetFileName);
-            var budgetAmount = float.Parse(File.ReadAllText(filename));
-            return budgetAmount;
+            try
+            {
+                var budgetAmount = float.Parse(File.ReadAllText(filename));
+                return budgetAmount;
+            }
+            catch
+            {
+                return 0;
+            }
+            
+        }
+
+        public static float SumOfExpenses()
+        {
+            float sumOfExpensesAmount = 0;            
+            var expenses = GetExpenses();
+            for (var i = 0; i < expenses.Count; i++)
+            {
+                sumOfExpensesAmount += expenses[i].Amount;
+            }
+            return sumOfExpensesAmount;
+        }
+
+        public static float RemainingBudget()
+        {
+            float sumOfExpensesAmount = 0;
+            var budget = ReadBudget();
+            if (budget != 0)
+            {
+                var expenses = GetExpenses();
+                for (var i = 0; i < expenses.Count; i++)
+                {
+                    sumOfExpensesAmount += expenses[i].Amount;
+                }
+                var remainingBudget = budget - sumOfExpensesAmount;
+                return remainingBudget;
+            }
+            else
+                return 0;
         }
 
 

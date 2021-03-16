@@ -37,17 +37,32 @@ namespace BudgetApp.Views
             picker.ItemsSource = expenseCategoryStrings;
 
         }
+        protected override void OnAppearing()
+        {
+            if (BindingContext != null)
+            {
+                var expense = (Expense)BindingContext;
+                if (!string.IsNullOrEmpty(expense.FileName))
+                {
+                    Description.Text = expense.ExpenseName;
+                    ExpenseDate.Date = expense.Date;
+                    ExpenseAmount.Text = expense.Amount.ToString();
+                    //Picker= expense.Category.ToString();
+                }
+            }
+        }
 
-        public string selectedCategory { get; set; }
-        public string expenseDescription { get; set; }
-        public float expenseAmount { get; set; }
-        public DateTime expenseDate { get; set; }
+
+     //   public string selectedCategory { get; set; }
+    //    public string expenseDescription { get; set; }
+     //   public float expenseAmount { get; set; }
+    //    public DateTime expenseDate { get; set; }
         public List<ExpenseCategory> ExpenseCategoriesList { get; set; }
         public List<string> expenseCategoryStrings { get; set; }
-        public Expense currentExpense { get; set; }
+    //    public Expense currentExpense { get; set; }
 
         //This is the event handler for the ExpenseDescription Entry box
-        private void ExpenseDescriptionTextChanged(object sender, TextChangedEventArgs e)
+        /*private void ExpenseDescriptionTextChanged(object sender, TextChangedEventArgs e)
         {
             var oldText = e.OldTextValue;
             var newText = e.NewTextValue;
@@ -77,13 +92,20 @@ namespace BudgetApp.Views
             var picker = sender as DatePicker;
             DateTime? date = picker.Date;
             expenseDate = (DateTime)date;
-        }
+        }*/
 
         //The event handler for the Save Button currently writes the values of the page to Output
 
         private async void SaveButtonClicked(object sender, EventArgs e)
         {
-          ExpenseCategory PickedCategory = ExpenseCategory.Other;
+            var expenseName = Description.Text;                                          
+            var expenseDate = ExpenseDate.Date;
+            var expenseAmount = float.Parse(ExpenseAmount.Text);
+            var category = (string)picker.SelectedItem;
+            Enum.TryParse(category, out ExpenseCategory myCategory);
+
+            /*//Picker.S = expense.Category.ToString();
+            ExpenseCategory PickedCategory = ExpenseCategory.Other;
             //Finding the right ExpenseCategory to assign to currentExpense
             for (int i = 0; i < expenseCategoryStrings.Count(); i++)
             {
@@ -91,10 +113,10 @@ namespace BudgetApp.Views
                 {
                     PickedCategory = ExpenseCategoriesList[i];
                 }
-            }
+            }*/
             //Creating a new instance of currentExpense
-            Expense currentExpense = new Expense(expenseDescription, expenseAmount, expenseDate, PickedCategory);
-
+            Expense currentExpense = new Expense(expenseName, expenseAmount, expenseDate, myCategory);
+            
             ExpenseManager.SaveExpense(currentExpense);
             await Navigation.PopModalAsync();
 

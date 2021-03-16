@@ -3,11 +3,9 @@ using BudgetApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Text;
+
 
 namespace BudgetApp.Model {
     [TestClass]
@@ -43,6 +41,18 @@ namespace BudgetApp.Model {
             ExpenseManager.SaveBudget(600);
              readBudgetAmount = ExpenseManager.ReadBudget();
             Assert.AreEqual(600, readBudgetAmount);
+        }
+
+        [TestMethod]
+
+        public void TestRamainingBudget()
+        {
+            ExpenseManager.SaveBudget(500);
+            var remainingBudget = ExpenseManager.RemainingBudget();
+            var budget = ExpenseManager.ReadBudget();
+            var amountLeft = budget - remainingBudget;
+            var expensesAmount = ExpenseManager.SumOfExpenses();
+            Assert.AreEqual(amountLeft, expensesAmount);
         }
     }
 }
