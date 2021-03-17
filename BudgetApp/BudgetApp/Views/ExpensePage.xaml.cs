@@ -68,12 +68,13 @@ namespace BudgetApp.Views
             
             ExpenseManager.SaveExpense(currentExpense);
             await Navigation.PopModalAsync();
+               
 
         }
 
-        private void DeleteButtonClicked(object sender, EventArgs e)
+        private  async void DeleteButtonClicked(object sender, EventArgs e)
         {
-
+            await Navigation.PopModalAsync();
         }
 
     }

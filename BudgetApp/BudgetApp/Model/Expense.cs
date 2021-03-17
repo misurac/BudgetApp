@@ -34,7 +34,39 @@ namespace BudgetApp.Model
                 date = DateTime.Now;
             }           
             Date = date;
-            CategoryIconFile = $"/Assets/CategoryIcons/{Category}/{ExpenseName}.png";
+            if (Category.ToString() == "Food")
+            {
+                CategoryIconFile = "food.png";
+            }
+            if (Category.ToString() == "Housing")
+            {
+                CategoryIconFile = "housing.png";
+            }
+            if (Category.ToString() == "Insurance")
+            {
+                CategoryIconFile = "insurance.png";
+            }
+            if (Category.ToString() == "Medical")
+            {
+                CategoryIconFile = "medical.png";
+            }
+            if (Category.ToString() == "Other")
+            {
+                CategoryIconFile = "other.png";
+            }
+            if (Category.ToString() == "Saving")
+            {
+                CategoryIconFile = "saving.png";
+            }
+            if (Category.ToString() == "Transportation")
+            {
+                CategoryIconFile = "transportation.png";
+            }
+            if (Category.ToString() == "Utilities")
+            {
+                CategoryIconFile = "utilities.png";
+            }
+
         }
 
     }

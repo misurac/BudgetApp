@@ -41,6 +41,15 @@
                      Margin="30,0,0,0">
             <DatePicker.Format>MM/dd/yyyy</DatePicker.Format>
         </DatePicker>
+        <StackLayout Orientation="Horizontal" Spacing="0">
+            <Image Source="{Binding CategoryIconFile}" VerticalOptions="Center" BackgroundColor="Transparent"
+                               WidthRequest="15" HeightRequest="15"
+                               Margin="10,10,8,10">
+            </Image>
+            <Label  Text="{Binding Icon}" TextColor="White" VerticalTextAlignment="Center" FontSize="15" HorizontalOptions="Start"
+                               HorizontalTextAlignment="Start" Margin="0" Grid.Column="4">
+            </Label>
+        </StackLayout>
 
         <RelativeLayout Grid.Row="5">
 
