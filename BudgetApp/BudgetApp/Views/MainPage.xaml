@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BudgetApp.MainPage" BackgroundColor="LightCyan">
 
-    <StackLayout>
+    <StackLayout Margin="20,10,20,0">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -15,11 +15,11 @@
             </Grid.ColumnDefinitions>
         </Grid>
         <Label Text="Monthly Budget" FontAttributes="Bold" FontSize="18" />
-        <Entry  x:Name="Budget" Grid.Column="1" Placeholder="{Binding Source= ExpenseManager.ReadBudget}" />
+        <Entry  x:Name="Budget" Grid.Column="1" Placeholder="{Binding Source= ExpenseManager.ReadBudget}" HorizontalOptions="StartAndExpand"/>
         <Label  Grid.Row="1" Text="Remaining Budget :" FontAttributes="Bold" FontSize="18"/>
-        <Entry  x:Name="RemainingAmount" Grid.Row="1" Grid.Column="1" Placeholder="{Binding Source = ExpenseManager.RemainingBudget}" />
-        <Button x:Name="AddNewExpense" Text="Add Expense" Clicked="AddNewExpense_Clicked" Margin="100,20,100,20" Font="Bold" FontSize="20"
-                BackgroundColor="LightSeaGreen" IsEnabled="False"/>
+        <Entry  x:Name="RemainingAmount" Grid.Row="1" Grid.Column="1" Placeholder="{Binding Source = ExpenseManager.RemainingBudget}" HorizontalOptions="StartAndExpand"/>
+        <Button x:Name="AddNewExpense" Text="+ New Expense" Clicked="AddNewExpense_Clicked" Margin="100,20,100,20" FontSize="Medium"
+                BackgroundColor="LightSeaGreen" IsEnabled="False" HeightRequest="45"/>
         <Grid BackgroundColor="LightBlue" HeightRequest="30" Margin="0,0,0,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -58,7 +58,7 @@
 
                             </Grid.ColumnDefinitions>
                             <Label  Grid.Column="0" Text="{Binding ExpenseName}" FontAttributes="Bold"/>
-                            <Label  Grid.Column="1" Text="{Binding Date}" FontAttributes="Bold"/>
+                            <Label  Grid.Column="1" Text="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}" FontAttributes="Bold"/>
                             <Label Grid.Column="2" Text="{Binding Amount}" FontAttributes="Bold"/>
                             <Label Grid.Column="3" Text="{Binding Category}" FontAttributes="Bold"/>
                             <Label Grid.Column="4" Text="{Binding Icon}" FontAttributes="Bold"/>
