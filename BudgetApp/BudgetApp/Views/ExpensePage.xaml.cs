@@ -22,7 +22,7 @@ namespace BudgetApp.Views
             ExpenseCategoriesList = new List<ExpenseCategory>();
             ExpenseCategoriesList.Add(ExpenseCategory.Food);
             ExpenseCategoriesList.Add(ExpenseCategory.Housing);
-            ExpenseCategoriesList.Add(ExpenseCategory.Insuarance);
+            ExpenseCategoriesList.Add(ExpenseCategory.Insurance);
             ExpenseCategoriesList.Add(ExpenseCategory.Medical);
             ExpenseCategoriesList.Add(ExpenseCategory.Other);
             ExpenseCategoriesList.Add(ExpenseCategory.Saving);
@@ -68,12 +68,13 @@ namespace BudgetApp.Views
             
             ExpenseManager.SaveExpense(currentExpense);
             await Navigation.PopModalAsync();
+               
 
         }
 
-        private void DeleteButtonClicked(object sender, EventArgs e)
+        private  async void DeleteButtonClicked(object sender, EventArgs e)
         {
-
+            await Navigation.PopModalAsync();
         }
 
     }

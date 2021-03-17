@@ -41,6 +41,8 @@
                      Margin="30,0,0,0">
             <DatePicker.Format>MM/dd/yyyy</DatePicker.Format>
         </DatePicker>
+        
+        
 
         <RelativeLayout Grid.Row="5">
 

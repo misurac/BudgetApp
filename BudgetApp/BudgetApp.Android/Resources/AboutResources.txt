@@ -17,6 +17,9 @@ Resources/
     drawable-mdpi/
         icon.png
 
+    drawable/
+        icon.png
+
     layout/
         main.xml
 

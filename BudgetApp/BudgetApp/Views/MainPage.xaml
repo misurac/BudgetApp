@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BudgetApp.MainPage" BackgroundColor="LightCyan">
 
+ 
     <StackLayout>
+      
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -32,7 +35,7 @@
                 <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="30*" />
             </Grid.ColumnDefinitions>
-            
+
             <Label  Grid.Column="0" Text="EName"  FontAttributes="Bold" FontSize="18" Margin="8,0,0,0" WidthRequest="30"/>
             <Label  Grid.Column="1" Text="Date" FontAttributes="Bold" FontSize="18"/>
             <Label Grid.Column="2" Text="Amount" FontAttributes="Bold" FontSize="18"/>
@@ -61,12 +64,20 @@
                             <Label  Grid.Column="1" Text="{Binding Date}" FontAttributes="Bold"/>
                             <Label Grid.Column="2" Text="{Binding Amount}" FontAttributes="Bold"/>
                             <Label Grid.Column="3" Text="{Binding Category}" FontAttributes="Bold"/>
-                            <Label Grid.Column="4" Text="{Binding Icon}" FontAttributes="Bold"/>
+
+                            <StackLayout x:Name="HeaderLayout" Orientation="Vertical" Margin="5,0,-610,5" >
+                                <Image Source="{Binding CategoryIconFile}" HeightRequest="25" WidthRequest="25" HorizontalOptions="Center"/>
+                            </StackLayout>
+
+
+
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
     </StackLayout>
+
 
 </ContentPage>
