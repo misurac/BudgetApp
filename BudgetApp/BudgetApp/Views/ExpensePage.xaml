@@ -52,6 +52,10 @@
                     RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=130}"
                     RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
 
+            <Button Text="Delete" 
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=230}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
         </RelativeLayout>
 
 
