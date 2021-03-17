@@ -8,7 +8,7 @@ namespace BudgetApp.Model
     {
         Food,
         Housing,
-        Insuarance,
+        Insurance,
         Medical,
         Other,
         Saving,
@@ -34,6 +34,7 @@ namespace BudgetApp.Model
                 date = DateTime.Now;
             }           
             Date = date;
+            //Assigning the category and telling to display the icon for the category
             if (Category.ToString() == "Food")
             {
                 CategoryIconFile = "food.png";

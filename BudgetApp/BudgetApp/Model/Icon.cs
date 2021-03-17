@@ -14,7 +14,7 @@ namespace BudgetApp.Model
             var icons = new List<Icon>();
             icons.Add(new Icon { IconFile = "Assets/Category Icons/food.png", Category = ExpenseCategory.Food });
             icons.Add(new Icon { IconFile = "Assets/ Category Icons/housing.png", Category = ExpenseCategory.Housing });
-            icons.Add(new Icon { IconFile = "Assets/ Category Icons/insurance.png", Category = ExpenseCategory.Insuarance });
+            icons.Add(new Icon { IconFile = "Assets/ Category Icons/insurance.png", Category = ExpenseCategory.Insurance });
             icons.Add(new Icon { IconFile = "Assets/ Category Icons/medical.png", Category = ExpenseCategory.Medical });
             icons.Add(new Icon { IconFile = "Assets/ Category Icons/other.png", Category = ExpenseCategory.Other });
             icons.Add(new Icon { IconFile = "Assets/ Category Icons/saving.png", Category = ExpenseCategory.Saving });

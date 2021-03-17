@@ -22,7 +22,7 @@ namespace BudgetApp.Views
             ExpenseCategoriesList = new List<ExpenseCategory>();
             ExpenseCategoriesList.Add(ExpenseCategory.Food);
             ExpenseCategoriesList.Add(ExpenseCategory.Housing);
-            ExpenseCategoriesList.Add(ExpenseCategory.Insuarance);
+            ExpenseCategoriesList.Add(ExpenseCategory.Insurance);
             ExpenseCategoriesList.Add(ExpenseCategory.Medical);
             ExpenseCategoriesList.Add(ExpenseCategory.Other);
             ExpenseCategoriesList.Add(ExpenseCategory.Saving);
