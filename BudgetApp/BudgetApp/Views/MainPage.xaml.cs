@@ -48,17 +48,29 @@ namespace BudgetApp
 
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
-            var Expenses = ExpenseManager.GetExpenses();
-            ExpenseManager.SaveBudget(500);
+            budget = ExpenseManager.ReadBudget();
+            if (budget <= 0) {
+                await Navigation.PushModalAsync(new SaveBudgetPage
+                {
+                    BindingContext = null
+                });
+            }
+            
+
+            var ExpensesFromFile = ExpenseManager.GetExpenses();
+            //ExpenseManager.DeleteAllExpenses();
+            //ExpenseManager.SaveBudget(500);
             Budget.Text = budget.ToString();
             RemainingAmount.Text = ExpenseManager.RemainingBudget().ToString();
             if(budget > 0)
             {
                AddNewExpense.IsEnabled = true;
             }
-            foreach (var expense in Expenses)
+            //clearing the observableCollection list to get the new observableCollection list
+            expenses.Clear();
+            foreach (var expense in ExpensesFromFile)
             {
                 expenses.Add(expense);
             }
