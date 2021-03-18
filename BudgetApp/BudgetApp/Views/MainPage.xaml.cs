@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,12 +18,34 @@ namespace BudgetApp
         public ObservableCollection<Expense> expenses;
         public float budget = ExpenseManager.ReadBudget();
         public float remainingBudget = ExpenseManager.RemainingBudget();
+        public List<Month> MonthsList { get; set; }
+        public List<string> monthsStrings { get; set; }
         public MainPage()
         {
             InitializeComponent();
             expenses = new ObservableCollection<Expense>();
             Budget.Text = budget.ToString();
             RemainingAmount.Text = remainingBudget.ToString();
+
+            MonthsList = new List<Month>();
+            MonthsList.Add(Month.January);
+            MonthsList.Add(Month.February);
+            MonthsList.Add(Month.March);
+            MonthsList.Add(Month.April);
+            MonthsList.Add(Month.May);
+            MonthsList.Add(Month.June);
+            MonthsList.Add(Month.July);
+            MonthsList.Add(Month.August);
+            MonthsList.Add(Month.September);
+            MonthsList.Add(Month.October);
+            MonthsList.Add(Month.November);
+            MonthsList.Add(Month.December);
+
+            monthsStrings = new List<string>();
+            monthsStrings = MonthsList.ConvertAll(m => m.ToString());
+
+            mainpicker.ItemsSource = monthsStrings;
+
         }
 
         protected override void OnAppearing()

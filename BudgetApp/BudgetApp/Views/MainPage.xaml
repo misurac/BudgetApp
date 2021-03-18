@@ -4,44 +4,41 @@
              x:Class="BudgetApp.MainPage" BackgroundColor="LightCyan">
 
  
-    <StackLayout>
-      
+    <StackLayout Margin="20,20,20,20">
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-        <Label Text="Monthly Budget" FontAttributes="Bold" FontSize="18" />
-        <Entry  x:Name="Budget" Grid.Column="1" Placeholder="{Binding Source= ExpenseManager.ReadBudget}" />
-        <Label  Grid.Row="1" Text="Remaining Budget :" FontAttributes="Bold" FontSize="18"/>
-        <Entry  x:Name="RemainingAmount" Grid.Row="1" Grid.Column="1" Placeholder="{Binding Source = ExpenseManager.RemainingBudget}" />
-        <Button x:Name="AddNewExpense" Text="Add Expense" Clicked="AddNewExpense_Clicked" Margin="100,20,100,20" Font="Bold" FontSize="20"
-                BackgroundColor="LightSeaGreen" IsEnabled="False"/>
-        <Grid BackgroundColor="LightBlue" HeightRequest="30" Margin="0,0,0,10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="30*" />
-                <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="30*" />
-            </Grid.ColumnDefinitions>
+        <Picker 
+                x:Name="mainpicker"
+                Title="Select month"
+                HorizontalOptions="StartAndExpand"
+                />
+        
+            <Label Text="Monthly Budget:" FontAttributes="Bold" FontSize="Medium" />
+            <Entry  x:Name="Budget" Placeholder="{Binding Source= ExpenseManager.ReadBudget}" HorizontalOptions="StartAndExpand" />             
+            <Label  Grid.Row="1" Text="Remaining Budget :" FontAttributes="Bold" FontSize="Medium"/>
+            <Entry  x:Name="RemainingAmount" Placeholder="{Binding Source = ExpenseManager.RemainingBudget}" HorizontalOptions="StartAndExpand"/>
 
-            <Label  Grid.Column="0" Text="EName"  FontAttributes="Bold" FontSize="18" Margin="8,0,0,0" WidthRequest="30"/>
-            <Label  Grid.Column="1" Text="Date" FontAttributes="Bold" FontSize="18"/>
-            <Label Grid.Column="2" Text="Amount" FontAttributes="Bold" FontSize="18"/>
-            <Label Grid.Column="3" Text="Category" FontAttributes="Bold" FontSize="18" Margin="0,0,-5,0"/>
-            <Label Grid.Column="4" Text="Icon" FontAttributes="Bold" FontSize="18" Margin="0,0,-5,0"/>
-        </Grid>
+
+        <Button x:Name="AddNewExpense" Text="+ new expense" Clicked="AddNewExpense_Clicked" Margin="100,20,100,20" FontSize="Medium"
+                IsEnabled="False" CornerRadius="6" BorderColor="Black"  BorderWidth="1" 
+                HeightRequest="45"  VerticalOptions="Center"/>
+
+        <RelativeLayout BackgroundColor="LightBlue" HeightRequest="27">
+            <Label  Grid.Column="0" Text="EName" FontSize="Medium" FontAttributes="Bold"                    
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=5}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+            <Label  Grid.Column="1" Text="Date" FontSize="Medium" FontAttributes="Bold"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=90}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+            <Label Grid.Column="2" Text="Amount" FontSize="Medium" FontAttributes="Bold"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=158}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+            <Label Grid.Column="3" Text="Category" FontSize="Medium" FontAttributes="Bold"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=228}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+            <Label Grid.Column="4" Text="Icon" FontSize="Medium" FontAttributes="Bold"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=332}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+        </RelativeLayout>
         <ListView x:Name="ExpenseRecords" ItemsSource="{Binding expenses}" Margin="8,0,0,0" ItemSelected="ExpenseRecord_ItemSelected" >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -60,10 +57,10 @@
                                 <ColumnDefinition Width="30*" />
 
                             </Grid.ColumnDefinitions>
-                            <Label  Grid.Column="0" Text="{Binding ExpenseName}" FontAttributes="Bold"/>
-                            <Label  Grid.Column="1" Text="{Binding Date}" FontAttributes="Bold"/>
-                            <Label Grid.Column="2" Text="{Binding Amount}" FontAttributes="Bold"/>
-                            <Label Grid.Column="3" Text="{Binding Category}" FontAttributes="Bold"/>
+                            <Label  Grid.Column="0" Text="{Binding ExpenseName}" FontSize="Body"  HorizontalOptions="StartAndExpand"/>
+                            <Label  Grid.Column="1" Text="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}" FontSize="Body" HorizontalOptions="Center"/>
+                            <Label Grid.Column="2" Text="{Binding Amount}" FontSize="Body" HorizontalOptions="Center"/>
+                            <Label Grid.Column="3" Text="{Binding Category}" FontSize="Body" HorizontalOptions="Center"/>
 
                             <StackLayout x:Name="HeaderLayout" Orientation="Vertical" Margin="5,0,-610,5" >
                                 <Image Source="{Binding CategoryIconFile}" HeightRequest="25" WidthRequest="25" HorizontalOptions="Center"/>
