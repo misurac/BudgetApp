@@ -51,10 +51,15 @@ namespace BudgetApp.Model
             {
                 //converting the object in to string and saving it to the file.
                 var expenseProperties = e.ExpenseName + "," + e.Amount + "," + e.Date + "," + e.Category;
-                e.FileName = Path.Combine
-                    (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    $"{Path.GetRandomFileName()}.exp.txt");
+                if (string.IsNullOrEmpty(e.FileName))
+                {
+                    e.FileName = Path.Combine
+                        (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        $"{Path.GetRandomFileName()}.exp.txt");
+                    
+                }
                 File.WriteAllText(e.FileName, expenseProperties);
+
             }
             return true;
         }
@@ -72,6 +77,14 @@ namespace BudgetApp.Model
                    saveBudgetFileName);
                 File.WriteAllText(budgetFilename, budget.ToString());
             }
+            return true;
+        }
+
+        public static bool DeleteBudget() {
+            var filename = Path.Combine
+                    (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    saveBudgetFileName);
+            File.Delete(filename);
             return true;
         }
 
@@ -108,7 +121,7 @@ namespace BudgetApp.Model
         {
             float sumOfExpensesAmount = 0;
             var budget = ReadBudget();
-            if (budget != 0)
+            if (budget != 0 && budget > 0)
             {
                 var expenses = GetExpenses();
                 for (var i = 0; i < expenses.Count; i++)
@@ -121,6 +134,26 @@ namespace BudgetApp.Model
             else
                 return 0;
         }
+
+        public static void DeleteAllExpenses()
+        {
+            var files = Directory.EnumerateFiles(Environment.GetFolderPath
+              (Environment.SpecialFolder.LocalApplicationData), "*.exp.txt");
+            foreach (string filePath in files)
+                File.Delete(filePath);
+        }
+
+        public static bool DeleteExpense(Expense e)
+        {
+            if (e.FileName != null && e.FileName != "") 
+            {                
+                File.Delete(e.FileName);
+            }
+            return true;
+        }       
+        
+            
+        
 
 
     }

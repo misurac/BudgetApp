@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BudgetApp.Views.SaveBudgetPage">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Label Text="Please Add Budget For this Month" VerticalOptions="Center" HorizontalOptions="Center"
+               FontSize="Title" FontAttributes="Bold" />
+        <Entry  x:Name="BudgetAmount" Placeholder="Enter Monthly Budget" CursorPosition="10" Grid.Row="1" 
+               Margin="30,0,0,0"
+               HorizontalOptions="StartAndExpand"/>
+        <DatePicker  x:Name="MonthPicker"  Grid.Row="2" MinimumDate="1 Jan 2000" MaximumDate="31 Dec 2050"
+                         Format="M"  Margin="30,0,0,0" HorizontalOptions="StartAndExpand"/>
+        <RelativeLayout Grid.Row="3">
+
+            <Button x:Name="SaveButton" Text="Save" IsEnabled="True" Clicked="SaveButton_Clicked"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=30}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
+            <Button Text="Cancel" 
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=130}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
+        </RelativeLayout>
+    </Grid>
+
+
+</ContentPage>

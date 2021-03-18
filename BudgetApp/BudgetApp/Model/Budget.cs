@@ -24,6 +24,7 @@ namespace BudgetApp.Model
         public float BudgetAmount { get; set; }
         public Month MonthInYear { get; set; }
         public string FileName { get; set; }
+
         public Budget(float budgetAmount, Month month)
         {
             BudgetAmount = budgetAmount;

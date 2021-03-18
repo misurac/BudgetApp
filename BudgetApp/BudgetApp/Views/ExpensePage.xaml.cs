@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,8 +47,9 @@ namespace BudgetApp.Views
                 {
                     Description.Text = expense.ExpenseName;
                     ExpenseDate.Date = expense.Date;
-                    ExpenseAmount.Text = expense.Amount.ToString();                   
-                    //Picker.SelectedItemProperty= myCategory;
+                    ExpenseAmount.Text = expense.Amount.ToString();
+                    //Picker.SelectedItemProperty= myCategory;                                        
+                    DeleteButton.IsEnabled = true;
                 }  
             }
         }
@@ -58,28 +60,59 @@ namespace BudgetApp.Views
 
         private async void SaveButtonClicked(object sender, EventArgs e)
         {
-            var expenseName = Description.Text;                                          
+            var expenseName = Description.Text;
             var expenseDate = ExpenseDate.Date;
             var expenseAmount = float.Parse(ExpenseAmount.Text);
             var category = (string)picker.SelectedItem;
-            Enum.TryParse(category, out ExpenseCategory myCategory);           
-            //Creating a new instance of currentExpense
-            Expense currentExpense = new Expense(expenseName, expenseAmount, expenseDate, myCategory);
-            
-            ExpenseManager.SaveExpense(currentExpense);
+            Enum.TryParse(category, out ExpenseCategory myCategory);
+
+            //here we did binding context, to edit the values of the expense
+            if (BindingContext != null)
+            {
+                var expense = (Expense)BindingContext;
+                expense.ExpenseName = expenseName;
+                expense.Date = File.GetCreationTime(expense.FileName);
+                expense.Category = myCategory;
+                expense.Amount = expenseAmount;
+                ExpenseManager.SaveExpense(expense);
+            }
+            //if binding context is null then,        
+            //Creating a new instance of currentExpense 
+            else
+            {
+                Expense currentExpense = new Expense(expenseName, expenseAmount, expenseDate, myCategory);
+                ExpenseManager.SaveExpense(currentExpense);
+            }
             await Navigation.PopModalAsync();
                
 
         }
 
-        private  async void DeleteButtonClicked(object sender, EventArgs e)
+        private  async void CancelButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void DeleteButtonClicked(object sender, EventArgs e)
         {
+            var expenseName = Description.Text;
+            //var expenseDate = 
+            var expenseAmount = float.Parse(ExpenseAmount.Text);
+            var category = (string)picker.SelectedItem;
+            Enum.TryParse(category, out ExpenseCategory myCategory);
 
+            //here we did binding context, to edit the values of the expense
+            if (BindingContext != null)
+            {
+                var expense = (Expense)BindingContext;
+                expense.ExpenseName = expenseName;
+                expense.Amount = expenseAmount;
+                expense.Date = File.GetCreationTime(expense.FileName); 
+                expense.Category = myCategory;
+                ExpenseManager.DeleteExpense(expense);
+            }
+
+            await Navigation.PopModalAsync();
         }
     }
 }

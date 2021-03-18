@@ -7,35 +7,33 @@
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <ContentView BackgroundColor="Gray"
-                         HeightRequest="100">
+                         HeightRequest="50">
                 <Label Text="Budget App"
-                       Margin="5,2,5,2"
-                       FontSize="20"
+                       Margin="90,5,90,5"
+                       FontSize="22"
                        TextColor="GhostWhite"
                        FontAttributes="Bold"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"/>
+                       />
             </ContentView>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
     <Shell.ItemTemplate>
-        <DataTemplate>
+        <DataTemplate >
             <StackLayout Orientation="Horizontal"
-                         Spacing="30">
+                         Spacing="60">
                 <Label Text="{Binding Title}"
                        TextColor="Black"
-                       FontSize="15"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"/>
+                       FontSize="18"
+                       FontAttributes="None"
+                       Margin="8,0,0,0"/>
             </StackLayout>
         </DataTemplate>
     </Shell.ItemTemplate>
-    <FlyoutItem Title="MainPage">
+    <FlyoutItem Title="AllExpenses">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="ExpensePage">
+    <FlyoutItem Title="AddExpense">
         <ShellContent ContentTemplate="{DataTemplate Views:ExpensePage}"/>
     </FlyoutItem>
     
