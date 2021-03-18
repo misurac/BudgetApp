@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BudgetApp.Views.ExpensePage">
+             x:Class="BudgetApp.Views.ExpensePage" BackgroundColor="LightCyan">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -9,16 +9,16 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="110" />
+            <RowDefinition Height="75" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
-        <Label Text="Add Your New Expense" VerticalOptions="Center" HorizontalOptions="Center"
+        <Label Text="Your Expense" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"
                FontSize="Title"/>
 
         <Entry  x:Name="Description" Placeholder="Describe your expense" CursorPosition="10" Grid.Row="1" 
@@ -42,16 +42,18 @@
             <DatePicker.Format>MM/dd/yyyy</DatePicker.Format>
         </DatePicker>
         
-        
+        <RelativeLayout Grid.Row="5" Margin="0,10,0,0">
 
-        <RelativeLayout Grid.Row="5">
-
-            <Button Text="Save" Clicked="SaveButtonClicked"
+            <Button Text="Save" Clicked="SaveButtonClicked" CornerRadius="6" BorderColor="Black" BorderWidth=".5"
                     RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=30}"
                     RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
 
-            <Button Text="Delete" Clicked="DeleteButtonClicked"
+            <Button Text="Delete" Clicked="DeleteButtonClicked" CornerRadius="6" BorderColor="Black" BorderWidth=".5"
                     RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=130}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
+            <Button Text="Cancel" Clicked="Button_Clicked" CornerRadius="6" BorderColor="Black" BorderWidth=".5"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=230}"
                     RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
 
         </RelativeLayout>

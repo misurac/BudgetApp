@@ -77,5 +77,9 @@ namespace BudgetApp.Views
             await Navigation.PopModalAsync();
         }
 
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

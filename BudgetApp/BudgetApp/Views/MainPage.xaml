@@ -16,7 +16,7 @@
         </StackLayout>
 
         <Button x:Name="AddNewExpense" Text="+ new expense" Clicked="AddNewExpense_Clicked" Margin="100,20,100,20" FontSize="Medium"
-                BackgroundColor="SteelBlue"  IsEnabled="False" CornerRadius="10" BorderColor="Black"  BorderWidth="1" 
+                IsEnabled="False" CornerRadius="6" BorderColor="Black"  BorderWidth="1" 
                 HeightRequest="45"  VerticalOptions="Center"/>
 
         <RelativeLayout BackgroundColor="LightBlue" HeightRequest="27">
