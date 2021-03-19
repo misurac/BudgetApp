@@ -21,6 +21,7 @@
                 x:Name="mainpicker"
                 Title="Select month"
                 HorizontalOptions="StartAndExpand"
+                SelectedIndexChanged="ItemSelectedFromPicker"
                 />
             <Button x:Name="AddNewExpense" Text="+ new expense" Clicked="AddNewExpense_Clicked" FontSize="Medium"
                 CornerRadius="6" BorderColor="Black"  BorderWidth="1" 
