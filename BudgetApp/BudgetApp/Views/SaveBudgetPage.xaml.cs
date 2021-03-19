@@ -19,7 +19,7 @@ namespace BudgetApp.Views
             InitializeComponent();
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             var files = Directory.EnumerateFiles(Environment.GetFolderPath
                 (Environment.SpecialFolder.LocalApplicationData), "*.bud.txt");
@@ -37,13 +37,16 @@ namespace BudgetApp.Views
                 BudgetAmount.Text = "0";
             }
             var budget = ExpenseManager.ReadBudget();
-            if (budget > 0)
-            {
-                await Navigation.PushModalAsync(new MainPage
-                {
-                    BindingContext = null
-                });
-            }
+
+            //commented out this to allow navigation to savebudget page from mainpage
+
+            //if (budget > 0)
+            //{
+            //    await Navigation.PushModalAsync(new MainPage
+            //    {
+            //        BindingContext = null
+            //    });
+            //}
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
