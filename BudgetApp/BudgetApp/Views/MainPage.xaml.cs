@@ -1,5 +1,7 @@
 ﻿using BudgetApp.Model;
 using BudgetApp.Views;
+using Microcharts;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -76,7 +78,29 @@ namespace BudgetApp
                 expenses.Add(expense);
             }
             ExpenseRecords.ItemsSource = expenses.OrderBy(n => n.Date).ToList();
-            
+
+            //work on chart below
+
+            var entries = new[]
+            {
+                    new ChartEntry(128)
+                {
+                    Label = "iOS",
+                    ValueLabel = "428",
+                    Color = SKColor.Parse("#b455b6")
+                },
+                new ChartEntry(514)
+                {
+                    Label = "Forms",
+                    ValueLabel = "214",
+                    Color = SKColor.Parse("#3498db")
+                }
+            };
+
+            var chart = new PieChart { Entries = entries };
+            chartView.Chart = chart;
+
+            //work on chart above
         }
 
         private void HamburgerButton_Clicked(object sender, EventArgs e)
