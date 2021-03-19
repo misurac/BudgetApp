@@ -28,6 +28,7 @@ namespace BudgetApp
             RemainingAmount.Text = remainingBudget.ToString();
 
             MonthsList = new List<Month>();
+            MonthsList.Add(Month.AllMonths);
             MonthsList.Add(Month.January);
             MonthsList.Add(Month.February);
             MonthsList.Add(Month.March);
@@ -81,6 +82,11 @@ namespace BudgetApp
         private void HamburgerButton_Clicked(object sender, EventArgs e)
         {
         }
+
+        private void EditBudgetButtonClick(object sender, EventArgs e)
+        {
+        }
+
         private async void AddNewExpense_Clicked(object sender, EventArgs e)
         {
             //It will navivate to expense page upon add expense button click
