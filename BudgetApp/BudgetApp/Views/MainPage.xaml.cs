@@ -83,8 +83,12 @@ namespace BudgetApp
         {
         }
 
-        private void EditBudgetButtonClick(object sender, EventArgs e)
+        private async void EditBudgetButtonClick(object sender, EventArgs e)
         {
+            await Navigation.PushModalAsync(new SaveBudgetPage
+            {
+                BindingContext = null
+            });
         }
 
         private void ItemSelectedFromPicker(object sender, EventArgs e)
