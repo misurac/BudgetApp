@@ -48,14 +48,17 @@
                     RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=30}"
                     RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
 
-            <Button Text="Cancel" Clicked="CancelButtonClicked"
+            <Button Text="Cancel" Clicked="CancelButtonClicked" CornerRadius="6" BorderColor="Black" BorderWidth=".5"
                     RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=130}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
+            <Button x:Name="DeleteButton" Text="Delete" Clicked="DeleteButtonClicked"  Grid.Row="6" Margin="30,0,30,0" IsEnabled="False"
+                    CornerRadius="6" BorderColor="Black" BorderWidth=".5" HorizontalOptions="StartAndExpand"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=200}"
                     RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
         </RelativeLayout>
 
-        <Button x:Name="DeleteButton" Text="Delete" Clicked="DeleteButtonClicked"  Grid.Row="6" Margin="30,0,30,0" IsEnabled="False"
-                    RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=130}"
-                    RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
+
 
 
     </Grid>

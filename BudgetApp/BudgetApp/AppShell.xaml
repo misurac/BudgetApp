@@ -3,29 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:Views="clr-namespace:BudgetApp.Views"
              xmlns:local="clr-namespace:BudgetApp"
-             x:Class="BudgetApp.AppShell">
+             x:Class="BudgetApp.AppShell" >
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
-            <ContentView BackgroundColor="Gray"
+            <ContentView BackgroundColor="LightBlue"
                          HeightRequest="50">
                 <Label Text="Budget App"
-                       Margin="90,5,90,5"
-                       FontSize="22"
-                       TextColor="GhostWhite"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="Title"
+                       TextColor="DarkSlateGray"
                        FontAttributes="Bold"
                        />
             </ContentView>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
     <Shell.ItemTemplate>
-        <DataTemplate >
+        <DataTemplate>
             <StackLayout Orientation="Horizontal"
-                         Spacing="60">
+                         BackgroundColor="LightCyan">
                 <Label Text="{Binding Title}"
                        TextColor="Black"
                        FontSize="18"
-                       FontAttributes="None"
-                       Margin="8,0,0,0"/>
+                       FontAttributes="Italic"
+                       Margin="12,0,0,0"/>
             </StackLayout>
         </DataTemplate>
     </Shell.ItemTemplate>

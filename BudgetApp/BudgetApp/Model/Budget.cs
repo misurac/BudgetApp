@@ -6,6 +6,7 @@ namespace BudgetApp.Model
 {
     public enum Month
     {
+        AllMonths = 0,
         January = 1,
         February = 2,
         March = 3,

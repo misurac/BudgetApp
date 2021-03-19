@@ -28,6 +28,7 @@ namespace BudgetApp
             RemainingAmount.Text = remainingBudget.ToString();
 
             MonthsList = new List<Month>();
+            MonthsList.Add(Month.AllMonths);
             MonthsList.Add(Month.January);
             MonthsList.Add(Month.February);
             MonthsList.Add(Month.March);
@@ -81,6 +82,28 @@ namespace BudgetApp
         private void HamburgerButton_Clicked(object sender, EventArgs e)
         {
         }
+
+        private void EditBudgetButtonClick(object sender, EventArgs e)
+        {
+        }
+
+        private void ItemSelectedFromPicker(object sender, EventArgs e)
+        {
+            //Getting the selected item from the picker
+            var SelectedMonth = mainpicker.Items[mainpicker.SelectedIndex];
+            //checking if the item is AllMonths. if yes, clearing the observable collection and adding all expenses to it
+            if (SelectedMonth == "AllMonths")
+            {
+                var ExpensesFromFile = ExpenseManager.GetExpenses();
+                expenses.Clear();
+                foreach (var expense in ExpensesFromFile)
+                {
+                    expenses.Add(expense);
+                }
+                ExpenseRecords.ItemsSource = expenses.OrderBy(n => n.Date).ToList();
+            }
+        }
+
         private async void AddNewExpense_Clicked(object sender, EventArgs e)
         {
             //It will navivate to expense page upon add expense button click
