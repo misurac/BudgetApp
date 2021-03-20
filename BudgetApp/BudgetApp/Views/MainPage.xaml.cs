@@ -166,5 +166,14 @@ namespace BudgetApp
                 });
             }
         }
+
+        private async void GraphAnalysis_Clicked(object sender, EventArgs e)
+        {
+
+            await Navigation.PushModalAsync(new GraphAnalysis());
+               
+            }
+
+        }
     }
-}
+

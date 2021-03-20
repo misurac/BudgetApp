@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BudgetApp.MainPage" BackgroundColor="LightCyan">
-
+   
     <StackLayout Margin="20,40,20,20">
 
         <StackLayout Orientation="Horizontal">
@@ -25,6 +25,9 @@
                 SelectedIndexChanged="ItemSelectedFromPicker"
                 />
             <Button x:Name="AddNewExpense" Text="+ new expense" Clicked="AddNewExpense_Clicked" FontSize="Medium"
+                CornerRadius="6" BorderColor="Black"  BorderWidth="1" 
+                HeightRequest="45"  VerticalOptions="Center"/>
+            <Button x:Name="GraphAnalysis" Text="Graph" Clicked="GraphAnalysis_Clicked" FontSize="Medium" 
                 CornerRadius="6" BorderColor="Black"  BorderWidth="1" 
                 HeightRequest="45"  VerticalOptions="Center"/>
         </StackLayout>
