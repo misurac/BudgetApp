@@ -20,8 +20,10 @@ namespace BudgetApp
         public ObservableCollection<Expense> expenses;
         public float budget = ExpenseManager.ReadBudget();
         public float remainingBudget = ExpenseManager.RemainingBudget();
+        public float amountSpent { get; set; }
         public List<Month> MonthsList { get; set; }
         public List<string> monthsStrings { get; set; }
+
         public MainPage()
         {
             InitializeComponent();
@@ -80,19 +82,21 @@ namespace BudgetApp
             ExpenseRecords.ItemsSource = expenses.OrderBy(n => n.Date).ToList();
 
             //work on chart below
-
+            amountSpent = budget - remainingBudget;
+            Debug.WriteLine(amountSpent);
+            Debug.WriteLine(remainingBudget);
             var entries = new[]
             {
-                    new ChartEntry(128)
+                    new ChartEntry(amountSpent)
                 {
                     Label = "iOS",
-                    ValueLabel = "428",
+                    ValueLabel = "hello",
                     Color = SKColor.Parse("#b455b6")
                 },
-                new ChartEntry(514)
+                new ChartEntry(remainingBudget)
                 {
                     Label = "Forms",
-                    ValueLabel = "214",
+                    ValueLabel = "hi there",
                     Color = SKColor.Parse("#3498db")
                 }
             };
