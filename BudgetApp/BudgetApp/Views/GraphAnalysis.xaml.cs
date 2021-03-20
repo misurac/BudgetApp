@@ -16,13 +16,19 @@ namespace BudgetApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GraphAnalysis : ContentPage
     {
-        public float budget = ExpenseManager.ReadBudget();
+        public static string selectedMonth { get; set; }
+        
+        
+
+        //public float budget = ExpenseManager.ReadBudget(month);
  
         public List<Entry> expensesList = new List<Entry>();
         public GraphAnalysis()
         {
             InitializeComponent();
-            budget = ExpenseManager.ReadBudget();
+            selectedMonth = DateTime.Now.ToString("MMMM");
+            Enum.TryParse(selectedMonth, out Month month);                       
+            var budget = ExpenseManager.ReadBudget(month);
             var ExpensesFromFile = ExpenseManager.GetExpenses();
 
 
