@@ -34,22 +34,26 @@ namespace BudgetApp.Model {
         //This will write and read the budget
         public void TestBudget()
         {
-            ExpenseManager.SaveBudget(500);
-            var readBudgetAmount=ExpenseManager.ReadBudget();
+            ExpenseManager.DeleteBudget();
+            var b = new Budget(500, Month.March);
+            ExpenseManager.SaveBudget(b);
+            var readBudgetAmount=ExpenseManager.ReadBudget(Month.March);
             Assert.AreEqual(500, readBudgetAmount);
 
-            ExpenseManager.SaveBudget(600);
-             readBudgetAmount = ExpenseManager.ReadBudget();
-            Assert.AreEqual(600, readBudgetAmount);
+            ExpenseManager.SaveBudget(b);
+             readBudgetAmount = ExpenseManager.ReadBudget(Month.March);
+            Assert.AreEqual(500, readBudgetAmount);
         }
 
         [TestMethod]
 
         public void TestRamainingBudget()
         {
-            ExpenseManager.SaveBudget(500);
-            var remainingBudget = ExpenseManager.RemainingBudget();
-            var budget = ExpenseManager.ReadBudget();
+            ExpenseManager.DeleteBudget();
+            var b = new Budget(500, Month.March);
+            ExpenseManager.SaveBudget(b);
+            var remainingBudget = ExpenseManager.RemainingBudget(Month.March);
+            var budget = ExpenseManager.ReadBudget(Month.March);
             var amountLeft = budget - remainingBudget;
             var expensesAmount = ExpenseManager.SumOfExpenses();
             Assert.AreEqual(amountLeft, expensesAmount);

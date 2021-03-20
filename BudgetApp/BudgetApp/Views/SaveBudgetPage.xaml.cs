@@ -21,10 +21,11 @@ namespace BudgetApp.Views
 
         protected override void OnAppearing()
         {
+            /*
             var files = Directory.EnumerateFiles(Environment.GetFolderPath
                 (Environment.SpecialFolder.LocalApplicationData), "*.bud.txt");
             foreach (string filePath in files)
-                File.Delete(filePath);
+                File.Delete(filePath); */
             try
             {
                 if (float.Parse(BudgetAmount.Text) > 0)
@@ -36,17 +37,7 @@ namespace BudgetApp.Views
             {
                 BudgetAmount.Text = "0";
             }
-            var budget = ExpenseManager.ReadBudget();
-
-            //commented out this to allow navigation to savebudget page from mainpage
-
-            //if (budget > 0)
-            //{
-            //    await Navigation.PushModalAsync(new MainPage
-            //    {
-            //        BindingContext = null
-            //    });
-            //}
+            
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
@@ -66,12 +57,12 @@ namespace BudgetApp.Views
                 month = DateTime.Now.Month;
             }
             //converting the enum value to enum
-            //Budget budget = new Budget(amount, (Month)month);
-            ExpenseManager.SaveBudget(amount);
+            Budget budget = new Budget(amount, (Month)month);
+            ExpenseManager.SaveBudget(budget);
             await Navigation.PushModalAsync(new MainPage
             {
                 BindingContext = null
-            });
+            }) ;
 
 
 

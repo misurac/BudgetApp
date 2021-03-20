@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -9,7 +10,7 @@ namespace BudgetApp.Model
 {
     public static class ExpenseManager
     {
-        public static string saveBudgetFileName = "bud.txt";
+        //public static string saveBudgetFileName = "bud.txt";
         public static List<Expense> GetExpenses()
         {
             
@@ -64,43 +65,62 @@ namespace BudgetApp.Model
             return true;
         }
 
-        public static bool SaveBudget(float e)
+        public static bool SaveBudget(Budget e)
         {
             
-            if (e > 0)
+            if (e !=null && e.BudgetAmount> 0)
             {
-                var budget = e;
-                /*since there will be only one value for save budget, made it as static variable and given a name
-                /to the file "saveBudgetFileName"*/
+                //var budget = e;
+                var expenseProperties = e.BudgetAmount + "," + (int)e.MonthInYear;
                 var budgetFilename = Path.Combine
                     (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                   saveBudgetFileName);
-                File.WriteAllText(budgetFilename, budget.ToString());
+                   $"{Path.GetRandomFileName()}.bud.txt");
+                File.WriteAllText(budgetFilename, expenseProperties);
             }
             return true;
         }
 
         public static bool DeleteBudget() {
-            var filename = Path.Combine
-                    (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    saveBudgetFileName);
-            File.Delete(filename);
+            var files = Directory.EnumerateFiles(Environment.GetFolderPath
+                (Environment.SpecialFolder.LocalApplicationData), "*.bud.txt");
+            
+            foreach (var file in files)
+            {
+                File.Delete(file);               
+            }
             return true;
         }
 
-        public static float ReadBudget()
+        public static float ReadBudget(Month e)
         {
+            if (e == Month.AllMonths)
+            {
+                var files = Directory.EnumerateFiles(Environment.GetFolderPath
+                (Environment.SpecialFolder.LocalApplicationData), "*.bud.txt");
+                var sumOfAllBudgets = 0;
+                foreach (var file in files)
+                {
+                    var budget = File.ReadAllText(file);
+                    var splittedContent = budget.Split(',');
+                    sumOfAllBudgets += Convert.ToInt32(splittedContent[0]);
 
-            var filename = Path.Combine
-                    (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    saveBudgetFileName);
-            try
-            {
-                var budgetAmount = float.Parse(File.ReadAllText(filename));
-                return budgetAmount;
+                }
+                return sumOfAllBudgets;
             }
-            catch
+            else
             {
+                var files = Directory.EnumerateFiles(Environment.GetFolderPath
+                (Environment.SpecialFolder.LocalApplicationData), "*.bud.txt");
+                foreach (var file in files)
+                {
+                    var budget = File.ReadAllText(file);
+                    var splittedContent = budget.Split(',');
+                    var month = int.Parse(splittedContent[1]);
+                    if (month == Convert.ToInt32(e))
+                    {
+                        return float.Parse(splittedContent[0]);
+                    }
+               }
                 return 0;
             }
             
@@ -117,13 +137,13 @@ namespace BudgetApp.Model
             return sumOfExpensesAmount;
         }
 
-        public static float RemainingBudget()
+        public static float RemainingBudget(Month e)
         {
             float sumOfExpensesAmount = 0;
-            var budget = ReadBudget();
+            var budget = ReadBudget(e);
             if (budget != 0 && budget > 0)
             {
-                var expenses = GetExpenses();
+                var expenses = GetExpensesByMonth(e);
                 for (var i = 0; i < expenses.Count; i++)
                 {
                     sumOfExpensesAmount += expenses[i].Amount;
@@ -150,10 +170,24 @@ namespace BudgetApp.Model
                 File.Delete(e.FileName);
             }
             return true;
-        }       
-        
-            
-        
+        }
+
+        public static List<Expense> GetExpensesByMonth(Month e)
+        {
+            if (e == Month.AllMonths)
+            {
+                return GetExpenses();
+            }
+            else
+            {
+                var allExpenses = GetExpenses();
+                var filteredExpenses = allExpenses.Where(expense => expense.Date.Month == Convert.ToInt32(e)).ToList();
+                return filteredExpenses;
+            }
+        }
+
+
+
 
 
     }
