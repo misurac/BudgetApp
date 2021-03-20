@@ -21,6 +21,7 @@ namespace BudgetApp
         public ObservableCollection<Expense> expenses;
         public float budget = ExpenseManager.ReadBudget((Month)DateTime.Now.Month);
         public float remainingBudget = ExpenseManager.RemainingBudget((Month)DateTime.Now.Month);
+        public static string selectedMonth { get; set; }
         public float amountSpent { get; set; }
         public List<Month> MonthsList { get; set; }
         public List<string> monthsStrings { get; set; }
@@ -51,10 +52,21 @@ namespace BudgetApp
 
             mainpicker.ItemsSource = monthsStrings;
 
+            //MonthLabel.Text = selectedMonth;
+
+
+            selectedMonth = DateTime.Now.ToString("MMMM");
+            
+
+            mainpicker.Title = selectedMonth;
+
+            
+
         }
 
         protected async override void OnAppearing()
         {
+            Debug.WriteLine($"In OnAppearing: {selectedMonth}");
             //ExpenseManager.DeleteAllExpenses();
             var allExpenses = ExpenseManager.GetExpenses();
             foreach(var expense in allExpenses)
@@ -115,6 +127,8 @@ namespace BudgetApp
 
             //work on chart above
 
+            
+
         }
 
         private void HamburgerButton_Clicked(object sender, EventArgs e)
@@ -133,6 +147,11 @@ namespace BudgetApp
         {
             //Getting the selected item from the picker
             var SelectedMonth = mainpicker.Items[mainpicker.SelectedIndex];
+            selectedMonth = SelectedMonth;
+            //MonthLabel.Text = selectedMonth;
+            mainpicker.Title = selectedMonth;
+
+            Debug.WriteLine($"In ItemSelectedFromPicker: {selectedMonth}");
             //checking if the item is AllMonths. if yes, clearing the observable collection and adding all expenses to it
             if (SelectedMonth == "AllMonths")
             {
@@ -167,6 +186,8 @@ namespace BudgetApp
                     expenses.Add(expense);
                 }
             }
+            
+            mainpicker.Title = selectedMonth;
         }
 
         private async void AddNewExpense_Clicked(object sender, EventArgs e)

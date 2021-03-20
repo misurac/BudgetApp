@@ -17,12 +17,13 @@
         <Entry  x:Name="RemainingAmount" Placeholder="{Binding Source = remainingBudget}" HorizontalOptions="StartAndExpand" Margin="0,-10,0,0"/>
 
         <microcharts:ChartView x:Name="chartView"/>
-
+        <Label x:Name="MonthLabel" Text="{Binding Source= selectedMonth}"/>
         <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
             <Picker 
                 x:Name="mainpicker"
-                Title="Select month"
+                Title="{Binding Source= selectedMonth}"
                 HorizontalOptions="StartAndExpand"
+                WidthRequest="100"
                 SelectedIndexChanged="ItemSelectedFromPicker"
                 />
             <Button x:Name="AddNewExpense" Text="+ new expense" Clicked="AddNewExpense_Clicked" FontSize="Medium"
