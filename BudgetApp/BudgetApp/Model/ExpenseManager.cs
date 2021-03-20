@@ -72,10 +72,14 @@ namespace BudgetApp.Model
             {
                 //var budget = e;
                 var expenseProperties = e.BudgetAmount + "," + (int)e.MonthInYear;
-                var budgetFilename = Path.Combine
+                if (string.IsNullOrEmpty(e.FileName))
+                {
+                    e.FileName = Path.Combine
                     (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                    $"{Path.GetRandomFileName()}.bud.txt");
-                File.WriteAllText(budgetFilename, expenseProperties);
+
+                }
+                File.WriteAllText(e.FileName, expenseProperties);
             }
             return true;
         }
@@ -91,7 +95,7 @@ namespace BudgetApp.Model
             return true;
         }
 
-        public static float ReadBudget(Month e)
+        public static Budget ReadBudget(Month e)
         {
             if (e == Month.AllMonths)
             {
@@ -105,7 +109,8 @@ namespace BudgetApp.Model
                     sumOfAllBudgets += Convert.ToInt32(splittedContent[0]);
 
                 }
-                return sumOfAllBudgets;
+                var b = new Budget(sumOfAllBudgets, Month.AllMonths);
+                return b;
             }
             else
             {
@@ -118,10 +123,14 @@ namespace BudgetApp.Model
                     var month = int.Parse(splittedContent[1]);
                     if (month == Convert.ToInt32(e))
                     {
-                        return float.Parse(splittedContent[0]);
+                        var bu = new Budget(float.Parse(splittedContent[0]), e);
+                        bu.FileName = file;
+                        return bu;
+                        
                     }
                }
-                return 0;
+                var b = new Budget(0, e);
+                return b;
             }
             
         }
@@ -141,14 +150,14 @@ namespace BudgetApp.Model
         {
             float sumOfExpensesAmount = 0;
             var budget = ReadBudget(e);
-            if (budget != 0 && budget > 0)
+            if (budget.BudgetAmount != 0 && budget.BudgetAmount > 0)
             {
                 var expenses = GetExpensesByMonth(e);
                 for (var i = 0; i < expenses.Count; i++)
                 {
                     sumOfExpensesAmount += expenses[i].Amount;
                 }
-                var remainingBudget = budget - sumOfExpensesAmount;
+                var remainingBudget = budget.BudgetAmount - sumOfExpensesAmount;
                 return remainingBudget;
             }
             else

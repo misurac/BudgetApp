@@ -16,7 +16,7 @@ namespace BudgetApp
     public partial class MainPage : ContentPage
     {
         public ObservableCollection<Expense> expenses;
-        public float budget = ExpenseManager.ReadBudget((Month)DateTime.Now.Month);
+        public Budget budget = ExpenseManager.ReadBudget((Month)DateTime.Now.Month);
         public float remainingBudget = ExpenseManager.RemainingBudget((Month)DateTime.Now.Month);
         public List<Month> MonthsList { get; set; }
         public List<string> monthsStrings { get; set; }
@@ -50,28 +50,29 @@ namespace BudgetApp
 
             selectedMonth = DateTime.Now.ToString("MMMM");
 
-            mainpicker.Title = selectedMonth;
+            mainpicker.SelectedItem = selectedMonth;
 
         }
 
         protected async override void OnAppearing()
         {
             //ExpenseManager.DeleteAllExpenses();
+            //ExpenseManager.DeleteBudget();
             var allExpenses = ExpenseManager.GetExpenses();
             foreach(var expense in allExpenses)
             {
                 expenses.Add(expense);
             }
             budget = ExpenseManager.ReadBudget((Month)DateTime.Now.Month);
-            if (budget <= 0) {
+            if (budget.BudgetAmount <= 0) {
                 await Navigation.PushModalAsync(new SaveBudgetPage
                 {
                     BindingContext = null
                 });
             }                                
-            Budget.Text = budget.ToString();
+            Budget.Text = budget.BudgetAmount.ToString();
             RemainingAmount.Text = ExpenseManager.RemainingBudget((Month)DateTime.Now.Month).ToString();
-            if(budget > 0)
+            if(budget.BudgetAmount > 0)
             {
                AddNewExpense.IsEnabled = true;
             }
@@ -98,10 +99,14 @@ namespace BudgetApp
 
         private async void EditBudgetButtonClick(object sender, EventArgs e)
         {
+
+            var SelectedMonth = mainpicker.Items[mainpicker.SelectedIndex];            
+            Enum.TryParse(SelectedMonth.ToString(), out Month month);          
             await Navigation.PushModalAsync(new SaveBudgetPage
             {
-                BindingContext = null
-            });
+                budget = budget,
+                
+            }) ; 
         }
 
         private void ItemSelectedFromPicker(object sender, EventArgs e)
@@ -114,8 +119,9 @@ namespace BudgetApp
             //checking if the item is AllMonths. if yes, clearing the observable collection and adding all expenses to it
             if (SelectedMonth == "AllMonths")
             {
+                EditBudget.IsEnabled = false;
                 Enum.TryParse(SelectedMonth, out Month month);
-                Budget.Text = ExpenseManager.ReadBudget(month).ToString();
+                Budget.Text = ExpenseManager.ReadBudget(month).BudgetAmount.ToString();
                 RemainingAmount.Text = ExpenseManager.RemainingBudget(month).ToString();
                 var ExpensesFromFile = ExpenseManager.GetExpenses();
                 expenses.Clear();
@@ -132,9 +138,10 @@ namespace BudgetApp
             }
             else
             {
+                EditBudget.IsEnabled = true;
                 Enum.TryParse(SelectedMonth, out Month month);
                 budget = ExpenseManager.ReadBudget(month);
-                Budget.Text = budget.ToString();
+                Budget.Text = budget.BudgetAmount.ToString();
                 remainingBudget = ExpenseManager.RemainingBudget(month);
                 RemainingAmount.Text = remainingBudget.ToString();
                 var expensesList = ExpenseManager.GetExpensesByMonth(month);

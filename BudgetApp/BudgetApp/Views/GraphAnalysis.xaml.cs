@@ -27,8 +27,7 @@ namespace BudgetApp.Views
         {
             InitializeComponent();
             selectedMonth = DateTime.Now.ToString("MMMM");
-            Enum.TryParse(selectedMonth, out Month month);                       
-            var budget = ExpenseManager.ReadBudget(month);
+            Enum.TryParse(selectedMonth, out Month month);                                   
             var ExpensesFromFile = ExpenseManager.GetExpenses();
 
 
