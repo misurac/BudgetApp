@@ -20,6 +20,7 @@ namespace BudgetApp
         public float remainingBudget = ExpenseManager.RemainingBudget((Month)DateTime.Now.Month);
         public List<Month> MonthsList { get; set; }
         public List<string> monthsStrings { get; set; }
+        public static string selectedMonth { get; set; }
         public MainPage()
         {
             InitializeComponent();
@@ -46,6 +47,10 @@ namespace BudgetApp
             monthsStrings = MonthsList.ConvertAll(m => m.ToString());
 
             mainpicker.ItemsSource = monthsStrings;
+
+            selectedMonth = DateTime.Now.ToString("MMMM");
+
+            mainpicker.Title = selectedMonth;
 
         }
 
@@ -103,6 +108,9 @@ namespace BudgetApp
         {
             //Getting the selected item from the picker
             var SelectedMonth = mainpicker.Items[mainpicker.SelectedIndex];
+
+            selectedMonth = SelectedMonth;
+            mainpicker.Title = selectedMonth;
             //checking if the item is AllMonths. if yes, clearing the observable collection and adding all expenses to it
             if (SelectedMonth == "AllMonths")
             {

@@ -19,7 +19,8 @@
         <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
             <Picker 
                 x:Name="mainpicker"
-                Title="Select month"
+                Title="{Binding Source= selectedMonth}"
+                WidthRequest="100"
                 HorizontalOptions="StartAndExpand"
                 SelectedIndexChanged="ItemSelectedFromPicker"
                 />
