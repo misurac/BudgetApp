@@ -16,8 +16,8 @@ namespace BudgetApp
     public partial class MainPage : ContentPage
     {
         public ObservableCollection<Expense> expenses;
-        public float budget = ExpenseManager.ReadBudget();
-        public float remainingBudget = ExpenseManager.RemainingBudget();
+        public float budget = ExpenseManager.ReadBudget((Month)DateTime.Now.Month);
+        public float remainingBudget = ExpenseManager.RemainingBudget((Month)DateTime.Now.Month);
         public List<Month> MonthsList { get; set; }
         public List<string> monthsStrings { get; set; }
         public MainPage()
@@ -51,32 +51,40 @@ namespace BudgetApp
 
         protected async override void OnAppearing()
         {
-            budget = ExpenseManager.ReadBudget();
+            //ExpenseManager.DeleteAllExpenses();
+            var allExpenses = ExpenseManager.GetExpenses();
+            foreach(var expense in allExpenses)
+            {
+                expenses.Add(expense);
+            }
+            budget = ExpenseManager.ReadBudget((Month)DateTime.Now.Month);
             if (budget <= 0) {
                 await Navigation.PushModalAsync(new SaveBudgetPage
                 {
                     BindingContext = null
                 });
-            }
-            
-
-            var ExpensesFromFile = ExpenseManager.GetExpenses();
-            //ExpenseManager.DeleteAllExpenses();
-            //ExpenseManager.SaveBudget(500);
+            }                                
             Budget.Text = budget.ToString();
-            RemainingAmount.Text = ExpenseManager.RemainingBudget().ToString();
+            RemainingAmount.Text = ExpenseManager.RemainingBudget((Month)DateTime.Now.Month).ToString();
             if(budget > 0)
             {
                AddNewExpense.IsEnabled = true;
             }
             //clearing the observableCollection list to get the new observableCollection list
             expenses.Clear();
-            foreach (var expense in ExpensesFromFile)
+            var expensesByMonth = ExpenseManager.GetExpensesByMonth((Month)DateTime.Now.Month);
+            foreach (var expense in expensesByMonth)
             {
                 expenses.Add(expense);
             }
-            ExpenseRecords.ItemsSource = expenses.OrderBy(n => n.Date).ToList();
-            
+
+            var orderedExpenses = expenses.OrderBy(n => n.Date).ToList() ;
+            expenses.Clear();
+            foreach(var expense in orderedExpenses)
+            {
+                expenses.Add(expense);
+            }
+            ExpenseRecords.ItemsSource =  expenses;
         }
 
         private void HamburgerButton_Clicked(object sender, EventArgs e)
@@ -98,13 +106,36 @@ namespace BudgetApp
             //checking if the item is AllMonths. if yes, clearing the observable collection and adding all expenses to it
             if (SelectedMonth == "AllMonths")
             {
+                Enum.TryParse(SelectedMonth, out Month month);
+                Budget.Text = ExpenseManager.ReadBudget(month).ToString();
+                RemainingAmount.Text = ExpenseManager.RemainingBudget(month).ToString();
                 var ExpensesFromFile = ExpenseManager.GetExpenses();
                 expenses.Clear();
                 foreach (var expense in ExpensesFromFile)
                 {
                     expenses.Add(expense);
                 }
-                ExpenseRecords.ItemsSource = expenses.OrderBy(n => n.Date).ToList();
+                var orderedExpenses = expenses.OrderBy(n => n.Date).ToList();
+                expenses.Clear();
+                foreach (var expense in orderedExpenses)
+                {
+                    expenses.Add(expense);
+                }
+            }
+            else
+            {
+                Enum.TryParse(SelectedMonth, out Month month);
+                budget = ExpenseManager.ReadBudget(month);
+                Budget.Text = budget.ToString();
+                remainingBudget = ExpenseManager.RemainingBudget(month);
+                RemainingAmount.Text = remainingBudget.ToString();
+                var expensesList = ExpenseManager.GetExpensesByMonth(month);
+                //Clearing the observable collection.
+                expenses.Clear();
+                foreach(var expense in expensesList)
+                {
+                    expenses.Add(expense);
+                }
             }
         }
 
