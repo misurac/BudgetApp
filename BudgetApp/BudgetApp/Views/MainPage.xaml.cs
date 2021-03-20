@@ -1,5 +1,8 @@
 ﻿using BudgetApp.Model;
 using BudgetApp.Views;
+using Microcharts;
+using Microcharts.Forms;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,6 +21,7 @@ namespace BudgetApp
         public ObservableCollection<Expense> expenses;
         public float budget = ExpenseManager.ReadBudget((Month)DateTime.Now.Month);
         public float remainingBudget = ExpenseManager.RemainingBudget((Month)DateTime.Now.Month);
+        public float amountSpent { get; set; }
         public List<Month> MonthsList { get; set; }
         public List<string> monthsStrings { get; set; }
         public MainPage()
@@ -85,6 +89,32 @@ namespace BudgetApp
                 expenses.Add(expense);
             }
             ExpenseRecords.ItemsSource =  expenses;
+
+            //work on chart below
+            amountSpent = budget - remainingBudget;
+            Debug.WriteLine(amountSpent);
+            Debug.WriteLine(remainingBudget);
+            var entries = new[]
+            {
+                    new ChartEntry(amountSpent)
+                {
+                    Label = "iOS",
+                    ValueLabel = "hello",
+                    Color = SKColor.Parse("#b455b6")
+                },
+                new ChartEntry(remainingBudget)
+                {
+                    Label = "Forms",
+                    ValueLabel = "hi there",
+                    Color = SKColor.Parse("#3498db")
+                }
+            };
+
+            var chart = new PieChart { Entries = entries };
+            chartView.Chart = chart;
+
+            //work on chart above
+
         }
 
         private void HamburgerButton_Clicked(object sender, EventArgs e)
