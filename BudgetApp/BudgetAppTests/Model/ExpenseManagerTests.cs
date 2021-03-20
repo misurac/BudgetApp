@@ -54,7 +54,7 @@ namespace BudgetApp.Model {
             ExpenseManager.SaveBudget(b);
             var remainingBudget = ExpenseManager.RemainingBudget(Month.March);
             var budget = ExpenseManager.ReadBudget(Month.March);
-            var amountLeft = budget - remainingBudget;
+            var amountLeft = budget.BudgetAmount - remainingBudget;
             var expensesAmount = ExpenseManager.SumOfExpenses();
             Assert.AreEqual(amountLeft, expensesAmount);
         }
