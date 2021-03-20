@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BudgetApp.Views.SaveBudgetPage">
+             x:Class="BudgetApp.Views.SaveBudgetPage" BackgroundColor="LightCyan">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <Label Text="Please Add Budget For this Month" VerticalOptions="Center" HorizontalOptions="Center"
+        <Label Text="Please Add Budget for this Month" VerticalOptions="Center" HorizontalOptions="Center"
                FontSize="Title" FontAttributes="Bold" />
         <Entry  x:Name="BudgetAmount" Placeholder="Enter Monthly Budget" CursorPosition="10" Grid.Row="1" 
                Margin="30,0,0,0"
@@ -25,10 +25,11 @@
         <RelativeLayout Grid.Row="3">
 
             <Button x:Name="SaveButton" Text="Save" IsEnabled="True" Clicked="SaveButton_Clicked"
+                    CornerRadius="6" BorderColor="Black"  BorderWidth="1"
                     RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=30}"
                     RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
 
-            <Button Text="Cancel" 
+            <Button Text="Cancel" CornerRadius="6" BorderColor="Black"  BorderWidth="1" Clicked="CancelButtonClicked"
                     RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=130}"
                     RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"/>
 

@@ -68,5 +68,12 @@ namespace BudgetApp.Views
 
         }
 
+        private async void CancelButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new MainPage
+            {
+                BindingContext = null
+            });
+        }
     }
 }
