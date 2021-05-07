@@ -37,10 +37,11 @@ namespace BudgetApp
         private void HamburgerButton_Clicked(object sender, EventArgs e)
         {
         }
-        private async void AddNewExpense_Clicked(object sender, EventArgs e)
+        private  async void AddNewExpense_Clicked(object sender, EventArgs e)
         {
+            
             //It will navivate to expense page upon add expense button click
-            await Navigation.PushModalAsync(new ExpensePage
+                await Navigation.PushModalAsync(new ExpensePage
             {
                 BindingContext = new ExpensePage()
             });

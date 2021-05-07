@@ -76,11 +76,15 @@ namespace BudgetApp.Model
 
         public static float ReadBudget()
         {
-            var filename = Path.Combine
-                    (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    saveBudgetFileName);
-            var budgetAmount = float.Parse(File.ReadAllText(filename));
-            return budgetAmount;
+            
+            {
+                var filename = Path.Combine
+                        (Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        saveBudgetFileName);
+                var budgetAmount = float.Parse(File.ReadAllText(filename));
+                return budgetAmount;
+            }
+            
         }
 
 

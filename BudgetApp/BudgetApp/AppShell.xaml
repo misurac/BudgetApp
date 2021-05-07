@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Views="clr-namespace:BudgetApp.Views"
+             xmlns:local="clr-namespace:BudgetApp"
+             mc:Ignorable="d"
+             FlyoutWidth="200"
+             FlyoutBackgroundColor="AliceBlue"
+             x:Class="BudgetApp.AppShell">
+             
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="CornflowerBlue"
+                         HeightRequest="200">
+                <Label Text="Budget App"
+                       Margin="5,2,5,2"
+                       FontSize="25"
+                       TextColor="GhostWhite"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <StackLayout Orientation="Horizontal"
+                         Spacing="30"
+                         HeightRequest="44">
+                <BoxView BackgroundColor="CornflowerBlue"
+                         Margin="5,0,0,0"
+                         HeightRequest="30"
+                         WidthRequest="5"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"/>
+                <Label Text="{Binding Title}"
+                       TextColor="CornflowerBlue"
+                       FontSize="25"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    <FlyoutItem Title="Add Expense">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Expense">
+        <ShellContent ContentTemplate="{DataTemplate Views:ExpensePage}"/>
+    </FlyoutItem>
+    
+    
+</Shell>

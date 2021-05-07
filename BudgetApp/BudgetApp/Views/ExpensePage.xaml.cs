@@ -66,6 +66,7 @@ namespace BudgetApp.Views
         //This is the event handler for the ExpenseAmount Entry box
         private void ExpenseAmountTextChanged(object sender, TextChangedEventArgs e)
         {
+           
             var oldText = e.OldTextValue;
             var newText = e.NewTextValue;
             expenseAmount = float.Parse(newText);

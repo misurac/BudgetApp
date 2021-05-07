@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <Label Text="Monthly Budget" FontAttributes="Bold" FontSize="18" />
+        <Label x:Name="monthlyBudget" Text="Monthly Budget" FontAttributes="Bold" FontSize="18" />
         <Entry Grid.Column="1" Placeholder="" />
         <Label Grid.Row="1" Text="Remaining Budget :" FontAttributes="Bold" FontSize="18"/>
         <Entry Grid.Row="1" Grid.Column="1" Placeholder="" />
